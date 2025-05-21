@@ -3,7 +3,7 @@ import React,{useState} from 'react'
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [userRole, setUserRole] = useState<'Admin' | 'Guest'>('Guest');
+  const [userRole, setUserRole] = useState('Guest');
   
   // Toggle mobile menu
   const toggleMenu = () => {
