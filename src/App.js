@@ -15,8 +15,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/kontakt" element={<Contact />} />
-        <Route path="/prijava" element={<Login />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/registracija" element={<Register />} />
         <Route
           path="/dashboard"
