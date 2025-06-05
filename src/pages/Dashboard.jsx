@@ -1,9 +1,607 @@
-import React from 'react'
+// The exported code uses Tailwind CSS. Install Tailwind CSS in your dev environment to ensure all styles work.
+
+import React, { useState } from 'react';
+import * as echarts from 'echarts';
 
 const Dashboard = () => {
-  return (
-    <div>Dashboard</div>
-  )
-}
+  const [activeTab, setActiveTab] = useState('nadzorna-ploca');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
-export default Dashboard
+  // Kategorije instrumenata
+  const categories = [
+    {
+      id: 'gitare',
+      name: 'Gitare',
+      count: 42,
+      stock: 'Dobro',
+      icon: 'fa-guitar',
+      image: 'https://readdy.ai/api/search-image?query=Professional%20electric%20and%20acoustic%20guitars%20arranged%20on%20a%20modern%20display%20with%20soft%20lighting%2C%20clean%20white%20background%2C%20high-quality%20musical%20instruments%20with%20detailed%20wood%20grain%20texture%20and%20polished%20hardware%2C%20professional%20studio%20photography&width=400&height=300&seq=1&orientation=landscape'
+    },
+    {
+      id: 'klaviri',
+      name: 'Klaviri i klavijature',
+      count: 35,
+      stock: 'Srednje',
+      icon: 'fa-piano-keyboard',
+      image: 'https://readdy.ai/api/search-image?query=Professional%20piano%20and%20keyboard%20instruments%20displayed%20on%20elegant%20stand%2C%20soft%20lighting%20on%20clean%20white%20background%2C%20high-quality%20musical%20instruments%20with%20detailed%20textures%20and%20polished%20surfaces%2C%20professional%20studio%20photography&width=400&height=300&seq=2&orientation=landscape'
+    },
+    {
+      id: 'bubnjevi',
+      name: 'Bubnjevi i udaraljke',
+      count: 28,
+      stock: 'Dobro',
+      icon: 'fa-drum',
+      image: 'https://readdy.ai/api/search-image?query=Professional%20drum%20set%20and%20percussion%20instruments%20arranged%20on%20modern%20display%2C%20soft%20lighting%20on%20clean%20white%20background%2C%20high-quality%20musical%20instruments%20with%20detailed%20textures%20and%20polished%20hardware%2C%20professional%20studio%20photography&width=400&height=300&seq=3&orientation=landscape'
+    },
+    {
+      id: 'puhacki',
+      name: 'Puhački instrumenti',
+      count: 31,
+      stock: 'Nisko',
+      icon: 'fa-trumpet',
+      image: 'https://readdy.ai/api/search-image?query=Professional%20wind%20instruments%20including%20saxophones%2C%20trumpets%20and%20flutes%20arranged%20on%20modern%20display%2C%20soft%20lighting%20on%20clean%20white%20background%2C%20high-quality%20brass%20and%20woodwind%20instruments%20with%20detailed%20textures%2C%20professional%20studio%20photography&width=400&height=300&seq=4&orientation=landscape'
+    },
+    {
+      id: 'gudacki',
+      name: 'Gudački instrumenti',
+      count: 24,
+      stock: 'Srednje',
+      icon: 'fa-violin',
+      image: 'https://readdy.ai/api/search-image?query=Professional%20string%20instruments%20including%20violins%2C%20cellos%20and%20violas%20arranged%20on%20elegant%20display%2C%20soft%20lighting%20on%20clean%20white%20background%2C%20high-quality%20wooden%20instruments%20with%20detailed%20grain%20textures%20and%20polished%20surfaces%2C%20professional%20studio%20photography&width=400&height=300&seq=5&orientation=landscape'
+    },
+    {
+      id: 'studio',
+      name: 'Studio oprema',
+      count: 53,
+      stock: 'Dobro',
+      icon: 'fa-microphone',
+      image: 'https://readdy.ai/api/search-image?query=Professional%20studio%20equipment%20including%20microphones%2C%20audio%20interfaces%20and%20headphones%20arranged%20on%20modern%20display%2C%20soft%20lighting%20on%20clean%20white%20background%2C%20high-quality%20recording%20equipment%20with%20detailed%20textures%20and%20modern%20design%2C%20professional%20studio%20photography&width=400&height=300&seq=6&orientation=landscape'
+    },
+    {
+      id: 'pojacala',
+      name: 'Pojačala i zvučnici',
+      count: 38,
+      stock: 'Dobro',
+      icon: 'fa-volume-up',
+      image: 'https://readdy.ai/api/search-image?query=Professional%20amplifiers%20and%20speakers%20for%20musical%20instruments%20arranged%20on%20modern%20display%2C%20soft%20lighting%20on%20clean%20white%20background%2C%20high-quality%20audio%20equipment%20with%20detailed%20textures%20and%20modern%20design%2C%20professional%20studio%20photography&width=400&height=300&seq=7&orientation=landscape'
+    },
+    {
+      id: 'tradicionalni',
+      name: 'Tradicionalni instrumenti',
+      count: 19,
+      stock: 'Nisko',
+      icon: 'fa-mandolin',
+      image: 'https://readdy.ai/api/search-image?query=Professional%20traditional%20Croatian%20folk%20instruments%20including%20tamburica%20and%20other%20ethnic%20instruments%20arranged%20on%20elegant%20display%2C%20soft%20lighting%20on%20clean%20white%20background%2C%20high-quality%20handcrafted%20instruments%20with%20detailed%20wood%20textures%2C%20professional%20studio%20photography&width=400&height=300&seq=8&orientation=landscape'
+    },
+    {
+      id: 'dodaci',
+      name: 'Glazbeni dodaci',
+      count: 67,
+      stock: 'Dobro',
+      icon: 'fa-guitar-pick',
+      image: 'https://readdy.ai/api/search-image?query=Professional%20music%20accessories%20including%20guitar%20picks%2C%20strings%2C%20capos%20and%20other%20small%20musical%20tools%20arranged%20on%20modern%20display%2C%20soft%20lighting%20on%20clean%20white%20background%2C%20high-quality%20accessories%20with%20detailed%20textures%2C%20professional%20studio%20photography&width=400&height=300&seq=9&orientation=landscape'
+    }
+  ];
+
+  // Statistički podaci
+  const stats = [
+    { id: 'total', name: 'Ukupno proizvoda', value: 337, icon: 'fa-box' },
+    { id: 'sale', name: 'Na akciji', value: 42, icon: 'fa-tag' },
+    { id: 'low', name: 'Niska zaliha', value: 18, icon: 'fa-exclamation-circle' },
+    { id: 'best', name: 'Najprodavaniji', value: 24, icon: 'fa-crown' }
+  ];
+
+  // Funkcija za inicijalizaciju grafikona prodaje
+  React.useEffect(() => {
+    const chartDom = document.getElementById('sales-chart');
+    if (chartDom) {
+      const myChart = echarts.init(chartDom);
+      const option = {
+        animation: false,
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        legend: {
+          data: ['Prodaja', 'Zaliha']
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: ['Gitare', 'Klaviri', 'Bubnjevi', 'Puhački', 'Gudački', 'Studio', 'Pojačala', 'Trad.', 'Dodaci']
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        series: [
+          {
+            name: 'Prodaja',
+            type: 'bar',
+            data: [15, 12, 8, 10, 7, 18, 14, 5, 22],
+            color: '#4F46E5'
+          },
+          {
+            name: 'Zaliha',
+            type: 'bar',
+            data: [42, 35, 28, 31, 24, 53, 38, 19, 67],
+            color: '#10B981'
+          }
+        ]
+      };
+      myChart.setOption(option);
+
+      // Resize grafikon kada se promijeni veličina prozora
+      window.addEventListener('resize', () => {
+        myChart.resize();
+      });
+
+      return () => {
+        window.removeEventListener('resize', () => {
+          myChart.resize();
+        });
+        myChart.dispose();
+      };
+    }
+  }, []);
+
+  // Funkcija za otvaranje modala za uređivanje kategorije
+  const handleEditCategory = (categoryId) => {
+    setSelectedCategory(categoryId);
+    setShowEditModal(true);
+  };
+
+  // Funkcija za filtriranje kategorija prema upitu za pretraživanje
+  const filteredCategories = categories.filter(category => 
+    category.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Funkcija za zatvaranje modala
+  const closeModal = () => {
+    setShowAddModal(false);
+    setShowEditModal(false);
+    setSelectedCategory(null);
+  };
+
+  // Komponenta za modal dodavanja novog instrumenta
+  const AddInstrumentModal = () => (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-gray-800">Dodaj novi instrument</h2>
+          <button 
+            onClick={closeModal}
+            className="text-gray-500 hover:text-gray-700 cursor-pointer"
+          >
+            <i className="fas fa-times text-xl"></i>
+          </button>
+        </div>
+        
+        <form className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Naziv instrumenta</label>
+              <input 
+                type="text" 
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="Unesite naziv instrumenta"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Kategorija</label>
+              <div className="relative">
+                <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 appearance-none">
+                  {categories.map(category => (
+                    <option key={category.id} value={category.id}>{category.name}</option>
+                  ))}
+                </select>
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                  <i className="fas fa-chevron-down text-gray-400"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Cijena (HRK)</label>
+              <input 
+                type="text" 
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="0.00"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Količina na zalihi</label>
+              <input 
+                type="number" 
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="0"
+                min="0"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Šifra proizvoda</label>
+              <input 
+                type="text" 
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="MZK-0000"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Opis</label>
+            <textarea 
+              rows={4} 
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Unesite opis instrumenta..."
+            ></textarea>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Fotografije</label>
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+              <i className="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
+              <p className="text-sm text-gray-500">Povucite i ispustite fotografije ovdje ili</p>
+              <button type="button" className="mt-2 px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-100 rounded-lg hover:bg-indigo-200 !rounded-button whitespace-nowrap cursor-pointer">
+                Odaberite datoteke
+              </button>
+            </div>
+          </div>
+
+          <div className="flex justify-end space-x-3">
+            <button 
+              type="button" 
+              onClick={closeModal}
+              className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 !rounded-button whitespace-nowrap cursor-pointer"
+            >
+              Odustani
+            </button>
+            <button 
+              type="button" 
+              className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 !rounded-button whitespace-nowrap cursor-pointer"
+            >
+              Spremi instrument
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+
+  // Komponenta za modal uređivanja kategorije
+  const EditCategoryModal = () => {
+    const category = categories.find(c => c.id === selectedCategory);
+    
+    if (!category) return null;
+    
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold text-gray-800">Uredi kategoriju: {category.name}</h2>
+            <button 
+              onClick={closeModal}
+              className="text-gray-500 hover:text-gray-700 cursor-pointer"
+            >
+              <i className="fas fa-times text-xl"></i>
+            </button>
+          </div>
+          
+          <div className="mb-6">
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="w-16 h-16 bg-indigo-100 rounded-lg flex items-center justify-center">
+                <i className={`fas ${category.icon} text-indigo-600 text-2xl`}></i>
+              </div>
+              <div>
+                <h3 className="font-medium">{category.name}</h3>
+                <p className="text-sm text-gray-500">{category.count} proizvoda u kategoriji</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Naziv kategorije</label>
+              <input 
+                type="text" 
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                defaultValue={category.name}
+              />
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Minimalna zaliha</label>
+                <input 
+                  type="number" 
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                  placeholder="5"
+                  min="0"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Status kategorije</label>
+                <div className="relative">
+                  <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 appearance-none">
+                    <option value="active">Aktivna</option>
+                    <option value="hidden">Skrivena</option>
+                  </select>
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <i className="fas fa-chevron-down text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Popust na kategoriju (%)</label>
+              <input 
+                type="number" 
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="0"
+                min="0"
+                max="100"
+              />
+            </div>
+            
+            <div className="flex justify-end space-x-3">
+              <button 
+                type="button" 
+                onClick={closeModal}
+                className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 !rounded-button whitespace-nowrap cursor-pointer"
+              >
+                Odustani
+              </button>
+              <button 
+                type="button" 
+                className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 !rounded-button whitespace-nowrap cursor-pointer"
+              >
+                Spremi promjene
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Gornja navigacijska traka */}
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex">
+              <div className="flex-shrink-0 flex items-center">
+                <h1 className="text-2xl font-bold text-indigo-600">MuzikaCRO</h1>
+              </div>
+              <nav className="hidden sm:ml-6 sm:flex sm:space-x-8">
+                <button 
+                  onClick={() => setActiveTab('nadzorna-ploca')}
+                  className={`${activeTab === 'nadzorna-ploca' ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer whitespace-nowrap`}
+                >
+                  <i className="fas fa-tachometer-alt mr-2"></i>
+                  Nadzorna ploča
+                </button>
+                <button 
+                  onClick={() => setActiveTab('proizvodi')}
+                  className={`${activeTab === 'proizvodi' ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer whitespace-nowrap`}
+                >
+                  <i className="fas fa-guitar mr-2"></i>
+                  Proizvodi
+                </button>
+                <button 
+                  onClick={() => setActiveTab('narudzbe')}
+                  className={`${activeTab === 'narudzbe' ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer whitespace-nowrap`}
+                >
+                  <i className="fas fa-shopping-cart mr-2"></i>
+                  Narudžbe
+                </button>
+                <button 
+                  onClick={() => setActiveTab('kupci')}
+                  className={`${activeTab === 'kupci' ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer whitespace-nowrap`}
+                >
+                  <i className="fas fa-users mr-2"></i>
+                  Kupci
+                </button>
+              </nav>
+            </div>
+            <div className="flex items-center">
+              <button className="p-2 rounded-full text-gray-400 hover:text-gray-500 relative cursor-pointer">
+                <i className="fas fa-bell text-xl"></i>
+                <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+              </button>
+              <div className="ml-4 flex items-center">
+                <div className="h-8 w-8 rounded-full bg-indigo-600 flex items-center justify-center text-white cursor-pointer">
+                  <i className="fas fa-user"></i>
+                </div>
+                <span className="ml-2 text-sm font-medium text-gray-700 hidden md:block">Admin</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Glavni sadržaj */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Naslov i traka za pretraživanje */}
+        <div className="md:flex md:items-center md:justify-between mb-6">
+          <div className="flex-1 min-w-0">
+            <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+              Upravljanje instrumentima
+            </h2>
+          </div>
+          <div className="mt-4 flex md:mt-0 md:ml-4">
+            <div className="relative rounded-md shadow-sm max-w-xs w-full md:w-64">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i className="fas fa-search text-gray-400"></i>
+              </div>
+              <input
+                type="text"
+                className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 pr-12 py-2 sm:text-sm border-gray-300 rounded-md"
+                placeholder="Pretraži instrumente"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            <button
+              onClick={() => setShowAddModal(true)}
+              className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 !rounded-button whitespace-nowrap cursor-pointer"
+            >
+              <i className="fas fa-plus mr-2"></i>
+              Dodaj novi instrument
+            </button>
+          </div>
+        </div>
+
+        {/* Statistički widgeti */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+          {stats.map((stat) => (
+            <div
+              key={stat.id}
+              className="bg-white overflow-hidden shadow rounded-lg"
+            >
+              <div className="p-5">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <div className={`h-12 w-12 rounded-md bg-indigo-100 flex items-center justify-center`}>
+                      <i className={`fas ${stat.icon} text-indigo-600 text-xl`}></i>
+                    </div>
+                  </div>
+                  <div className="ml-5 w-0 flex-1">
+                    <dl>
+                      <dt className="text-sm font-medium text-gray-500 truncate">
+                        {stat.name}
+                      </dt>
+                      <dd>
+                        <div className="text-lg font-medium text-gray-900">
+                          {stat.value}
+                        </div>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Grafikon prodaje */}
+        <div className="bg-white overflow-hidden shadow rounded-lg mb-8">
+          <div className="p-6">
+            <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">
+              Pregled prodaje i zaliha po kategorijama
+            </h3>
+            <div id="sales-chart" className="h-80 w-full"></div>
+          </div>
+        </div>
+
+        {/* Kategorije instrumenata */}
+        <div className="mb-6">
+          <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">
+            Kategorije instrumenata
+          </h3>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredCategories.map((category) => (
+              <div
+                key={category.id}
+                className="bg-white overflow-hidden shadow rounded-lg transition-all hover:shadow-md"
+              >
+                <div className="h-48 overflow-hidden">
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div className="p-5">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="h-10 w-10 rounded-md bg-indigo-100 flex items-center justify-center">
+                        <i className={`fas ${category.icon} text-indigo-600`}></i>
+                      </div>
+                      <div className="ml-3">
+                        <h4 className="text-lg font-medium text-gray-900">{category.name}</h4>
+                        <p className="text-sm text-gray-500">{category.count} proizvoda</p>
+                      </div>
+                    </div>
+                    <div>
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                        category.stock === 'Dobro' 
+                          ? 'bg-green-100 text-green-800' 
+                          : category.stock === 'Srednje' 
+                            ? 'bg-yellow-100 text-yellow-800' 
+                            : 'bg-red-100 text-red-800'
+                      }`}>
+                        {category.stock}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="mt-4 flex justify-between">
+                    <button
+                      onClick={() => {}}
+                      className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 !rounded-button whitespace-nowrap cursor-pointer"
+                    >
+                      <i className="fas fa-eye mr-1.5"></i>
+                      Pregledaj
+                    </button>
+                    <button
+                      onClick={() => handleEditCategory(category.id)}
+                      className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 !rounded-button whitespace-nowrap cursor-pointer"
+                    >
+                      <i className="fas fa-edit mr-1.5"></i>
+                      Uredi
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Donja akcijska traka */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 py-3 px-4">
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
+            <div className="flex space-x-4">
+              <button className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 !rounded-button whitespace-nowrap cursor-pointer">
+                <i className="fas fa-history mr-1.5"></i>
+                Povijest
+              </button>
+              <button className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 !rounded-button whitespace-nowrap cursor-pointer">
+                <i className="fas fa-file-export mr-1.5"></i>
+                Izvoz
+              </button>
+            </div>
+            <div>
+              <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 !rounded-button whitespace-nowrap cursor-pointer">
+                <i className="fas fa-save mr-1.5"></i>
+                Spremi promjene
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {/* Modali */}
+      {showAddModal && <AddInstrumentModal />}
+      {showEditModal && selectedCategory && <EditCategoryModal />}
+    </div>
+  );
+};
+
+export default Dashboard;
