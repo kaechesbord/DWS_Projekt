@@ -1,6 +1,7 @@
 // The exported code uses Tailwind CSS. Install Tailwind CSS in your dev environment to ensure all styles work.
 
 import React, { useState } from 'react';
+import Navbar from '../components/Navbar';
 
 const Kontakt = () => {
   const [formData, setFormData] = useState({
@@ -38,6 +39,8 @@ const Kontakt = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="min-h-screen bg-white font-sans">
       {/* Header */}
       <header className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6">
@@ -360,6 +363,7 @@ const Kontakt = () => {
         </div>
       </footer>
     </div>
+    </>
   );
 };
 

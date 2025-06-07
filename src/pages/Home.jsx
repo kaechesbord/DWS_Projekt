@@ -239,8 +239,8 @@ const Home = () => {
               </form>
             </div>
             
-            <div className="lg:w-1/2">
-              <div className="h-64 md:h-80 lg:h-full rounded-xl overflow-hidden shadow-lg mb-8">
+            <div className="lg:w-1/2 z-0">
+              <div className="h-64 md:h-80 lg:h-full rounded-xl overflow-hidden shadow-lg mb-8 z-10">
                 {/* Google Maps iframe */}
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d89894.14789906631!2d15.8861499!3d45.8150108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4765d692c902cc39%3A0x3a45249628fbc28a!2sZagreb!5e0!3m2!1sen!2shr!4v1621523456789!5m2!1sen!2shr" 
@@ -253,52 +253,7 @@ const Home = () => {
                 ></iframe>
               </div>
               
-              <div className="bg-gray-50 rounded-xl shadow-lg p-8">
-                <h3 className="text-xl font-semibold mb-4">Kontakt informacije</h3>
-                
-                <div className="space-y-4">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
-                      <i className="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div className="ml-4">
-                      <p className="text-sm font-medium text-gray-900">Adresa</p>
-                      <p className="text-sm text-gray-600">Ilica 256, 10000 Zagreb, Hrvatska</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
-                      <i className="fas fa-phone-alt"></i>
-                    </div>
-                    <div className="ml-4">
-                      <p className="text-sm font-medium text-gray-900">Telefon</p>
-                      <p className="text-sm text-gray-600">+385 1 234 5678</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
-                      <i className="fas fa-envelope"></i>
-                    </div>
-                    <div className="ml-4">
-                      <p className="text-sm font-medium text-gray-900">Email</p>
-                      <p className="text-sm text-gray-600">info@muzikacro.hr</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
-                      <i className="fas fa-clock"></i>
-                    </div>
-                    <div className="ml-4">
-                      <p className="text-sm font-medium text-gray-900">Radno vrijeme</p>
-                      <p className="text-sm text-gray-600">Pon - Pet: 9:00 - 20:00</p>
-                      <p className="text-sm text-gray-600">Sub: 9:00 - 15:00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            
             </div>
           </div>
         </div>
@@ -309,7 +264,7 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <div>
-              <h3 className="text-xl font-bold mb-4">MuzikaCRO</h3>
+              <h3 className="text-xl font-bold mb-4">SoundWave</h3>
               <p className="text-gray-400 mb-4">Najbolji izbor glazbenih instrumenata i opreme za profesionalce i hobiste.</p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
@@ -371,7 +326,7 @@ const Home = () => {
           <div className="border-t border-gray-800 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-gray-400 text-sm mb-4 md:mb-0">
-                &copy; 2025 MuzikaCRO. Sva prava pridržana.
+                &copy; 2025 SoundWave. Sva prava pridržana.
               </p>
               {/*solution*/ }
               <div className="flex space-x-4">

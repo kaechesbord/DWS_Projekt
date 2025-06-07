@@ -103,10 +103,10 @@ const Dashboard = () => {
         animation: false,
         tooltip: {
           trigger: 'axis',
+          
           axisPointer: {
             type: 'shadow'
-          }
-        },
+          },
         legend: {
           data: ['Prodaja', 'Zaliha']
         },
@@ -120,12 +120,12 @@ const Dashboard = () => {
           {
             type: 'category',
             data: ['Gitare', 'Klaviri', 'Bubnjevi', 'Puhački', 'Gudački', 'Studio', 'Pojačala', 'Trad.', 'Dodaci']
-          }
+          },
         ],
         yAxis: [
           {
             type: 'value'
-          }
+          },
         ],
         series: [
           {
@@ -139,9 +139,10 @@ const Dashboard = () => {
             type: 'bar',
             data: [42, 35, 28, 31, 24, 53, 38, 19, 67],
             color: '#10B981'
-          }
+          },
         ]
-      };
+      }
+    }
       myChart.setOption(option);
 
       // Resize grafikon kada se promijeni veličina prozora

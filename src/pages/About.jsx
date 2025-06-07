@@ -2,9 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faHandshake, faHeart } from "@fortawesome/free-regular-svg-icons";
 import React, { useState } from "react";
 import { faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import Navbar from "../components/Navbar";
 const About = () => {
   return (
     <div className="min-h-screen bg-gray-50 pt-20">
+      <Navbar />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-indigo-600 py-20">
         <div className="absolute inset-0">
