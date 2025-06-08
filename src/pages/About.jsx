@@ -31,7 +31,7 @@ const About = () => {
           <div className="max-w-3xl mx-auto">
             <div className="prose prose-lg">
               <p className="text-gray-600 mb-8">
-                MuzikaCRO je započela svoje putovanje 2003. godine kao mala
+                SoundWave je započela svoje putovanje 2003. godine kao mala
                 trgovina glazbenih instrumenata u srcu Zagreba. Kroz godine
                 predanog rada i strasti prema glazbi, izrasli smo u jednog od
                 vodećih dobavljača glazbene opreme u Hrvatskoj.
