@@ -1,4 +1,5 @@
 import React from 'react';
+import { useContext } from 'react';
 import Navbar from '../components/Navbar';
 import { useCart } from '../context/CartContext.jsx';
 

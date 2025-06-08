@@ -1,12 +1,14 @@
-import React,{useState} from 'react'
+import React,{useState, useContext} from 'react'
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import { AuthContext } from '../context/AuthContext';
+import Testimonials from '../components/Testimonials';
 
 const Home = () => {
  
   const [searchQuery, setSearchQuery] = useState('');
+  const { user, isAuthenticated } = useContext(AuthContext);
   
-
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 font-sans">
       {/* Navigation */}
@@ -31,9 +33,10 @@ const Home = () => {
             <p className="text-xl md:text-2xl mb-8 text-indigo-100">
               Najbolji izbor glazbenih instrumenata i opreme za profesionalce i hobiste
             </p>
+            {!isAuthenticated && (
             <Link to={"/registracija"}><button className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg shadow-lg transition-colors cursor-pointer !rounded-button whitespace-nowrap">
               Registrirajte se
-            </button></Link>
+            </button></Link>)}
           </div>
           
           <div className="md:w-1/2 w-full">
@@ -195,74 +198,12 @@ const Home = () => {
       
       
       {/* Contact Section */}
-      <section className="py-16 bg-white">
+            <section className="py-13 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Kontaktirajte nas</h2>
-          
-          <div className="flex flex-col lg:flex-row gap-12">
-            <div className="lg:w-1/2">
-              <form className="bg-white rounded-xl shadow-lg p-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Ime i prezime</label>
-                    <input 
-                      type="text" 
-                      className="w-full px-4 py-3 rounded-lg border-none bg-gray-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                      placeholder="Unesite ime i prezime"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input 
-                      type="email" 
-                      className="w-full px-4 py-3 rounded-lg border-none bg-gray-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                      placeholder="Unesite email adresu"
-                    />
-                  </div>
-                </div>
-                
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Predmet</label>
-                  <input 
-                    type="text" 
-                    className="w-full px-4 py-3 rounded-lg border-none bg-gray-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                    placeholder="Unesite predmet poruke"
-                  />
-                </div>
-                
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Poruka</label>
-                  <textarea 
-                    className="w-full px-4 py-3 rounded-lg border-none bg-gray-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none h-32"
-                    placeholder="Unesite vašu poruku"
-                  ></textarea>
-                </div>
-                
-                <button 
-                  type="submit" 
-                  className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded-lg transition-colors cursor-pointer !rounded-button whitespace-nowrap"
-                >
-                  Pošalji poruku
-                </button>
-              </form>
-            </div>
-            
-            <div className="lg:w-1/2 z-0">
-              <div className="h-64 md:h-80 lg:h-full rounded-xl overflow-hidden shadow-lg mb-8 z-10">
-                {/* Google Maps iframe */}
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d89894.14789906631!2d15.8861499!3d45.8150108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4765d692c902cc39%3A0x3a45249628fbc28a!2sZagreb!5e0!3m2!1sen!2shr!4v1621523456789!5m2!1sen!2shr" 
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen={true} 
-                  loading="lazy"
-                  title="Google Maps"
-                ></iframe>
-              </div>
-              
-            
+          <h2 className="text-3xl font-bold text-center mb-12">Recenzije</h2>
+          <div className="flex justify-start">
+            <div className="w-full md:w-2/3 lg:w-1/2">
+              <Testimonials />
             </div>
           </div>
         </div>

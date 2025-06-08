@@ -1,18 +1,22 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
-const CartContext = createContext();
 
-export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
+export const CartContext = createContext();
 
-  // Možeš dodati i neke funkcije za dodavanje/brisanje iz korpe itd.
+export const CartProvider = ({ children }) => {
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (item) => {
+    setCartItems(prevItems => [...prevItems, item]);
+  };
 
   return (
-    <CartContext.Provider value={{ cart, setCart }}>
+    <CartContext.Provider value={{ cartItems, addToCart }}>
       {children}
     </CartContext.Provider>
   );
-}
+};
+
 
 // **Ovo je hook koji koristiš u komponentama**
 export function useCart() {

@@ -1,5 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
+import Register from './pages/Register'; // ako još nemaš, da možeš registraciju koristiti
+
 
 // Import all your page components
 import About from './pages/About';
@@ -30,20 +33,26 @@ function App() {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/gitare" element={<Gitare />} />
-        <Route path="/klavijature" element={<Klavijature />} />
-        <Route path="/bubnjevi" element={<Bubnjevi />} />
-        <Route path="/audio-oprema" element={<AudioOprema />} />
-        <Route path="/contact" element={<Contact />} />
-        {/* Ukloni ovu rutu, CartProvider nije stranica */}
-        {/* <Route path="/CartProvider" element={<CartProvider />} /> */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/korpa" element={<Korpa />} />
-        <Route path="/potvrda-kupovine" element={<PotvrdaKupovine />} />
-        </Routes>
+<Routes>
+  {/* Javne rute */}
+  <Route path="/" element={<Home />} />
+  <Route path="/about" element={<About />} />
+  <Route path="/gitare" element={<Gitare />} />
+  <Route path="/klavijature" element={<Klavijature />} />
+  <Route path="/bubnjevi" element={<Bubnjevi />} />
+  <Route path="/audio-oprema" element={<AudioOprema />} />
+  <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
+  <Route path="/login" element={<Login />} />
+  <Route path="/registracija" element={<Register />} />
+
+  {/* Zaštićene rute - pristup samo ako je korisnik prijavljen */}
+  <Route path="/login" element={<Login />} />
+  
+  <Route element={<ProtectedRoute />}>
+    <Route path="/korpa" element={<Korpa />} />
+    <Route path="/potvrda-kupovine" element={<PotvrdaKupovine />} />
+  </Route>
+</Routes>
     </>
   );
 }

@@ -1,4 +1,29 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "5f48",
+      "firstName": "Merdan",
+      "lastName": "Mario",
+      "email": "Azam.hasicic@gmail.com",
+      "username": "Messi",
+      "password": "12345678"
+    },
+    {
+      "id": "37ad",
+      "firstName": "dsaDAS",
+      "lastName": "Mariodasdsad",
+      "email": "bibatoj729@dlbazi.com",
+      "username": "asdsada",
+      "password": "12345678"
+    },
+    {
+      "id": "d033",
+      "firstName": "Azam",
+      "lastName": "Hasicic",
+      "email": "Azam.Hasicic@gmail.com",
+      "username": "Azam",
+      "password": "12345678"
+    }
+  ],
   "messages": []
 }
