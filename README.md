@@ -15,7 +15,7 @@ Ovo je web aplikacija za online prodaju muzičkih instrumenata. Korisnici mogu p
 
 src/
 │
-├── components/ # Reusable UI komponente (npr. Navbar, Card, Footer)
+├── components/ # Reusable UI komponente (npr. Navbar, ProtectedRoute)
 ├── context/ # Globalni konteksti (npr. korpa, korisnik)
 ├── pages/ # Stranice aplikacije (Home, Product, Checkout, itd.)
 │
