@@ -119,9 +119,11 @@ const Home = () => {
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2">Gitare</h3>
                 <p className="text-gray-600 mb-4">Akustične, električne i bas gitare za svaki stil</p>
-                <button className="text-indigo-600 font-medium hover:text-indigo-800 transition-colors cursor-pointer !rounded-button whitespace-nowrap">
+                <Link to="/gitare">
+                  <button className="text-indigo-600 font-medium hover:text-indigo-800 transition-colors cursor-pointer !rounded-button whitespace-nowrap">
                   Pregledaj <i className="fas fa-arrow-right ml-1"></i>
-                </button>
+                  </button>
+            </Link>
               </div>
             </div>
             
@@ -137,9 +139,11 @@ const Home = () => {
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2">Klavijature</h3>
                 <p className="text-gray-600 mb-4">Klaviri, sintisajzeri i digitalni klaviri</p>
-                <button className="text-indigo-600 font-medium hover:text-indigo-800 transition-colors cursor-pointer !rounded-button whitespace-nowrap">
-                  Pregledaj <i className="fas fa-arrow-right ml-1"></i>
-                </button>
+                <Link to="/klavijature">
+                  <button className="text-indigo-600 font-medium hover:text-indigo-800 transition-colors cursor-pointer !rounded-button whitespace-nowrap">
+                    Pregledaj <i className="fas fa-arrow-right ml-1"></i>
+                  </button>
+                </Link>
               </div>
             </div>
             
@@ -155,9 +159,11 @@ const Home = () => {
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2">Bubnjevi i perkusije</h3>
                 <p className="text-gray-600 mb-4">Akustični i elektronički setovi, udaraljke</p>
-                <button className="text-indigo-600 font-medium hover:text-indigo-800 transition-colors cursor-pointer !rounded-button whitespace-nowrap">
-                  Pregledaj <i className="fas fa-arrow-right ml-1"></i>
-                </button>
+                <Link to="/bubnjevi">
+                    <button className="text-indigo-600 font-medium hover:text-indigo-800 transition-colors cursor-pointer !rounded-button whitespace-nowrap">
+                       Pregledaj <i className="fas fa-arrow-right ml-1"></i>
+                    </button>
+                </Link>
               </div>
             </div>
             
@@ -173,13 +179,16 @@ const Home = () => {
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2">Audio oprema</h3>
                 <p className="text-gray-600 mb-4">Miksete, zvučnici, mikrofoni i studijska oprema</p>
-                <button className="text-indigo-600 font-medium hover:text-indigo-800 transition-colors cursor-pointer !rounded-button whitespace-nowrap">
-                  Pregledaj <i className="fas fa-arrow-right ml-1"></i>
-                </button>
+                <Link to="/audio-oprema">
+                  <button className="text-indigo-600 font-medium hover:text-indigo-800 transition-colors cursor-pointer !rounded-button whitespace-nowrap">
+                     Pregledaj <i className="fas fa-arrow-right ml-1"></i>
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
+
       </section>
       
       {/* Login/Register Modal */}
