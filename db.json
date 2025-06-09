@@ -24,13 +24,33 @@
       "username": "Azam",
       "password": "12345678"
     },
-    { 
-  "id": 1,
-  "email": "messi@hotmail.com",
-  "username": "admin",
-  "password": "admin123",
-  "role": "Admin"
-}
+    {
+      "id": "1",
+      "email": "messi@hotmail.com",
+      "username": "admin",
+      "password": "admin123",
+      "role": "Admin"
+    }
   ],
-  "messages": []
+  "messages": [],
+  "instruments": [
+    {
+      "id": "48ef",
+      "name": "Azam",
+      "category": "bubnjevi",
+      "price": "4",
+      "stock": "2",
+      "code": "a",
+      "description": "ad"
+    },
+    {
+      "id": "194f",
+      "name": "f",
+      "category": "klaviri",
+      "price": "1",
+      "stock": "2",
+      "code": "3",
+      "description": "2"
+    }
+  ]
 }

@@ -1,17 +1,8 @@
 // The exported code uses Tailwind CSS. Install Tailwind CSS in your dev environment to ensure all styles work.
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as echarts from 'echarts';
-
-const Dashboard = () => {
-  const [activeTab, setActiveTab] = useState('nadzorna-ploca');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-
-  // Kategorije instrumenata
-  const categories = [
+const categories = [
     {
       id: 'gitare',
       name: 'Gitare',
@@ -86,78 +77,78 @@ const Dashboard = () => {
     }
   ];
 
+const Dashboard = () => {
+  const [activeTab, setActiveTab] = useState('nadzorna-ploca');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const [instruments, setInstruments] = useState([]);
+  const [instrumentForm, setInstrumentForm] = useState({
+    name: "",
+    category: "",
+    price: "",
+    stock: "",
+    code: "",
+    description: ""
+  });
+
+  // Kategorije instrumenata
+  
+
+  useEffect(() => {
+    fetch("http://localhost:5000/instruments")
+      .then(res => res.json())
+      .then(data => setInstruments(data));
+  }, []);
+
   // Statistički podaci
   const stats = [
-    { id: 'total', name: 'Ukupno proizvoda', value: 337, icon: 'fa-box' },
+    { id: 'total', name: 'Ukupno proizvoda', value: instruments.length, icon: 'fa-box' },
     { id: 'sale', name: 'Na akciji', value: 42, icon: 'fa-tag' },
     { id: 'low', name: 'Niska zaliha', value: 18, icon: 'fa-exclamation-circle' },
     { id: 'best', name: 'Najprodavaniji', value: 24, icon: 'fa-crown' }
   ];
-
+const handleInstrumentSubmit = async (e) => {
+  e.preventDefault();
+  await fetch("http://localhost:5000/instruments", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(instrumentForm)
+  });
+  // Osvježi instrumente
+  const res = await fetch("http://localhost:5000/instruments");
+  const data = await res.json();
+  setInstruments(data);
+  closeModal();
+};
   // Funkcija za inicijalizaciju grafikona prodaje
-  React.useEffect(() => {
+  // Echarts grafikon
+  useEffect(() => {
     const chartDom = document.getElementById('sales-chart');
     if (chartDom) {
       const myChart = echarts.init(chartDom);
       const option = {
         animation: false,
-        tooltip: {
-          trigger: 'axis',
-          
-          axisPointer: {
-            type: 'shadow'
-          },
-        legend: {
-          data: ['Prodaja', 'Zaliha']
-        },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true
-        },
-        xAxis: [
-          {
-            type: 'category',
-            data: ['Gitare', 'Klaviri', 'Bubnjevi', 'Puhački', 'Gudački', 'Studio', 'Pojačala', 'Trad.', 'Dodaci']
-          },
-        ],
-        yAxis: [
-          {
-            type: 'value'
-          },
-        ],
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        legend: { data: ['Prodaja', 'Zaliha'] },
+        grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+        xAxis: [{ type: 'category', data: categories.map(c => c.name) }],
+        yAxis: [{ type: 'value' }],
         series: [
-          {
-            name: 'Prodaja',
-            type: 'bar',
-            data: [15, 12, 8, 10, 7, 18, 14, 5, 22],
-            color: '#4F46E5'
-          },
-          {
-            name: 'Zaliha',
-            type: 'bar',
-            data: [42, 35, 28, 31, 24, 53, 38, 19, 67],
-            color: '#10B981'
-          },
+          { name: 'Prodaja', type: 'bar', data: [15, 12, 8, 10, 7, 18, 14, 5, 22], color: '#4F46E5' },
+          { name: 'Zaliha', type: 'bar', data: [42, 35, 28, 31, 24, 53, 38, 19, 67], color: '#10B981' }
         ]
-      }
-    }
+      };
       myChart.setOption(option);
-
-      // Resize grafikon kada se promijeni veličina prozora
-      window.addEventListener('resize', () => {
-        myChart.resize();
-      });
-
+      window.addEventListener('resize', () => myChart.resize());
       return () => {
-        window.removeEventListener('resize', () => {
-          myChart.resize();
-        });
+        window.removeEventListener('resize', () => myChart.resize());
         myChart.dispose();
       };
     }
-  }, []);
+  }, [categories]);
 
   // Funkcija za otvaranje modala za uređivanje kategorije
   const handleEditCategory = (categoryId) => {
@@ -170,11 +161,19 @@ const Dashboard = () => {
     category.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Funkcija za zatvaranje modala
+  // Modal logika
   const closeModal = () => {
     setShowAddModal(false);
     setShowEditModal(false);
     setSelectedCategory(null);
+    setInstrumentForm({
+      name: "",
+      category: "",
+      price: "",
+      stock: "",
+      code: "",
+      description: ""
+    });
   };
 
   // Komponenta za modal dodavanja novog instrumenta
@@ -191,95 +190,108 @@ const Dashboard = () => {
           </button>
         </div>
         
-        <form className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Naziv instrumenta</label>
-              <input 
-                type="text" 
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="Unesite naziv instrumenta"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Kategorija</label>
-              <div className="relative">
-                <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 appearance-none">
-                  {categories.map(category => (
-                    <option key={category.id} value={category.id}>{category.name}</option>
-                  ))}
-                </select>
-                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <i className="fas fa-chevron-down text-gray-400"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Cijena (HRK)</label>
-              <input 
-                type="text" 
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="0.00"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Količina na zalihi</label>
-              <input 
-                type="number" 
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="0"
-                min="0"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Šifra proizvoda</label>
-              <input 
-                type="text" 
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="MZK-0000"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Opis</label>
-            <textarea 
-              rows={4} 
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="Unesite opis instrumenta..."
-            ></textarea>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Fotografije</label>
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-              <i className="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
-              <p className="text-sm text-gray-500">Povucite i ispustite fotografije ovdje ili</p>
-              <button type="button" className="mt-2 px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-100 rounded-lg hover:bg-indigo-200 !rounded-button whitespace-nowrap cursor-pointer">
-                Odaberite datoteke
-              </button>
-            </div>
-          </div>
-
-          <div className="flex justify-end space-x-3">
-            <button 
-              type="button" 
-              onClick={closeModal}
-              className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 !rounded-button whitespace-nowrap cursor-pointer"
-            >
-              Odustani
-            </button>
-            <button 
-              type="button" 
-              className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 !rounded-button whitespace-nowrap cursor-pointer"
-            >
-              Spremi instrument
-            </button>
-          </div>
-        </form>
+        <form className="space-y-6" onSubmit={handleInstrumentSubmit}>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-1">Naziv instrumenta</label>
+      <input 
+        type="text"
+        name="name"
+        value={instrumentForm.name}
+        onChange={e => setInstrumentForm({ ...instrumentForm, name: e.target.value })}
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+        placeholder="Unesite naziv instrumenta"
+        required
+      />
+    </div>
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-1">Kategorija</label>
+      <div className="relative">
+        <select
+          name="category"
+          value={instrumentForm.category}
+          onChange={e => setInstrumentForm({ ...instrumentForm, category: e.target.value })}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 appearance-none"
+          required
+        >
+          <option value="">Odaberi kategoriju</option>
+          {categories.map(category => (
+            <option key={category.id} value={category.id}>{category.name}</option>
+          ))}
+        </select>
+        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+          <i className="fas fa-chevron-down text-gray-400"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-1">Cijena (HRK)</label>
+      <input 
+        type="text"
+        name="price"
+        value={instrumentForm.price}
+        onChange={e => setInstrumentForm({ ...instrumentForm, price: e.target.value })}
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+        placeholder="0.00"
+        required
+      />
+    </div>
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-1">Količina na zalihi</label>
+      <input 
+        type="number"
+        name="stock"
+        value={instrumentForm.stock}
+        onChange={e => setInstrumentForm({ ...instrumentForm, stock: e.target.value })}
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+        placeholder="0"
+        min="0"
+        required
+      />
+    </div>
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-1">Šifra proizvoda</label>
+      <input 
+        type="text"
+        name="code"
+        value={instrumentForm.code}
+        onChange={e => setInstrumentForm({ ...instrumentForm, code: e.target.value })}
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+        placeholder="MZK-0000"
+        required
+      />
+    </div>
+  </div>
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-1">Opis</label>
+    <textarea 
+      rows={4}
+      name="description"
+      value={instrumentForm.description}
+      onChange={e => setInstrumentForm({ ...instrumentForm, description: e.target.value })}
+      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+      placeholder="Unesite opis instrumenta..."
+      required
+    ></textarea>
+  </div>
+  <div className="flex justify-end space-x-3">
+    <button 
+      type="button" 
+      onClick={closeModal}
+      className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 !rounded-button whitespace-nowrap cursor-pointer"
+    >
+      Odustani
+    </button>
+    <button 
+      type="submit"
+      className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 !rounded-button whitespace-nowrap cursor-pointer"
+    >
+      Spremi instrument
+    </button>
+  </div>
+</form>
       </div>
     </div>
   );
@@ -574,7 +586,46 @@ const Dashboard = () => {
             ))}
           </div>
         </div>
-
+            <div className="mb-8">
+  <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">
+    Dodani instrumenti
+  </h3>
+  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {instruments.map((inst) => (
+      <div
+        key={inst.id}
+        className="bg-white overflow-hidden shadow rounded-lg transition-all hover:shadow-md"
+      >
+        <div className="p-5 flex flex-col h-full">
+          <div className="flex items-center mb-3">
+            <div className="h-10 w-10 rounded-md bg-indigo-100 flex items-center justify-center">
+              <i className="fas fa-music text-indigo-600"></i>
+            </div>
+            <div className="ml-3">
+              <h4 className="text-lg font-medium text-gray-900">{inst.name}</h4>
+              <p className="text-sm text-gray-500 capitalize">{categories.find(c => c.id === inst.category)?.name || inst.category}</p>
+            </div>
+          </div>
+          <div className="flex-1">
+            <div className="text-sm text-gray-700 mb-1">
+              <span className="font-semibold">Cijena:</span> {inst.price} kn
+            </div>
+            <div className="text-sm text-gray-700 mb-1">
+              <span className="font-semibold">Šifra:</span> {inst.code}
+            </div>
+            <div className="text-xs text-gray-500 mt-2">{inst.description}</div>
+          </div>
+          <div className="mt-4 flex justify-between">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+              Količina: {inst.stock}
+            </span>
+            {/* Ovdje možeš dodati dugmad za uređivanje/brisanje */}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
         {/* Donja akcijska traka */}
         <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 py-3 px-4">
           <div className="max-w-7xl mx-auto flex justify-between items-center">
