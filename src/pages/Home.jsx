@@ -3,11 +3,131 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { AuthContext } from '../context/AuthContext';
 import Testimonials from './Testimonials';
+import { useNavigate } from 'react-router-dom';
+
+// --- PODACI O INSTRUMENTIMA (kopirano iz Gitare.jsx, Klavijature.jsx, Bubnjevi.jsx, AudioOprema.jsx) ---
+const allInstruments = [
+  // Gitare
+  {
+    id: 'gitare-1',
+    name: 'Fender Stratocaster',
+    description: 'Klasična električna gitara poznata po zvuku i stilu',
+    category: 'Gitare',
+    img: require('../slike/fender.jpg'),
+  },
+  {
+    id: 'gitare-2',
+    name: 'Gibson Les Paul',
+    description: 'Topla i moćna gitara za rock i blues',
+    category: 'Gitare',
+    img: require('../slike/gibson.jpg'),
+  },
+  {
+    id: 'gitare-3',
+    name: 'Ibanez RG',
+    description: 'Brza gitara za metal i shred tehniku',
+    category: 'Gitare',
+    img: require('../slike/ibanez.webp'),
+  },
+  {
+    id: 'gitare-4',
+    name: 'Yamaha Pacifica',
+    description: 'Pristupačna gitara za početnike i amatere',
+    category: 'Gitare',
+    img: require('../slike/yamaha.webp'),
+  },
+  // Klavijature
+  {
+    id: 'klavir-1',
+    name: 'Yamaha P145 Digital Piano',
+    description: 'Elegantan i lagan digitalni klavir, idealan za učenje i vježbanje kod kuće.',
+    category: 'Klavijature',
+    img: require('../slike/Yamaha_P145_Digital_Piano_Black.jpg'),
+  },
+  {
+    id: 'klavir-2',
+    name: 'Roland GO-KEYS 3',
+    description: 'Zabavna i jednostavna klavijatura za kreiranje glazbe.',
+    category: 'Klavijature',
+    img: require('../slike/Roland_GO-KEYS_3_Music_Creation_Keyboard.webp'),
+  },
+  {
+    id: 'klavir-3',
+    name: 'Roland FP-30X',
+    description: 'Kompaktan i pristupačan digitalni klavir s bogatim Roland zvukom.',
+    category: 'Klavijature',
+    img: require('../slike/Roland_FP-30X_Digital_Piano.webp'),
+  },
+  {
+    id: 'klavir-4',
+    name: 'Kawai ES920',
+    description: 'Izvrsni prijenosni digitalni klavir s realističnim zvukom.',
+    category: 'Klavijature',
+    img: require('../slike/Kawai_ES920_88-Key_Digital_Piano.webp'),
+  },
+  // Bubnjevi
+  {
+    id: 'bubanj-1',
+    name: 'Yamaha Stage Custom',
+    description: 'Komplet bubnjeva za profesionalce i amatere.',
+    category: 'Bubnjevi',
+    img: require('../slike/DW_DWe_4-Piece_Drum_Kit_Bundle.webp'),
+  },
+  {
+    id: 'bubanj-2',
+    name: 'Roland TD-1DMK',
+    description: 'Elektronski bubnjevi s realističnim osjećajem.',
+    category: 'Bubnjevi',
+    img: require('../slike/Roland_TD-17KVX_Electronic_Drum_Kit.jpg'),
+  },
+  // Audio oprema
+  {
+    id: 'audio-1',
+    name: 'Yamaha HS5',
+    description: 'Studijski monitori za precizan zvuk.',
+    category: 'Audio oprema',
+    img: require('../slike/Yamaha_P145_Digital_Piano_Black.jpg'),
+  },
+  {
+    id: 'audio-2',
+    name: 'Shure SM7B',
+    description: 'Profesionalni mikrofon za studio i podcast.',
+    category: 'Audio oprema',
+    img: require('../slike/shure_sm58.jpg'),
+  },
+];
+
 
 // Početna stranica aplikacije
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const { user, isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+
+  // Odredivanje rute na osnovu kategorije
+const getCategoryRoute = (category) => {
+  switch (category) {
+    case 'Gitare':
+      return '/gitare';
+    case 'Klavijature':
+      return '/klavijature';
+    case 'Bubnjevi':
+      return '/bubnjevi';
+    case 'Audio oprema':
+      return '/audio-oprema';
+    default:
+      return '/';
+  }
+};
+
+// Filtriraj instrumente prema unosu
+  const filteredInstruments = allInstruments.filter(
+    (inst) =>
+      inst.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      inst.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 font-sans">
@@ -57,53 +177,33 @@ const Home = () => {
               </div>
 
               {searchQuery && (
-                <div className="mt-4 bg-white rounded-lg shadow-lg p-4">
-                  <div className="text-sm text-gray-500 mb-2">
-                    Rezultati pretrage za: <span className="font-semibold">{searchQuery}</span>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center p-2 hover:bg-gray-50 rounded-lg cursor-pointer">
-                      <div className="w-12 h-12 bg-gray-200 rounded-md overflow-hidden mr-3">
-                        <img
-                          src="https://readdy.ai/api/search-image?query=acoustic%20guitar%20on%20clean%20white%20background%2C%20professional%20product%20photography%2C%20detailed%20wood%20grain%2C%20high%20resolution%2C%20studio%20lighting%2C%20isolated%20instrument&width=100&height=100&seq=2&orientation=squarish"
-                          alt="Akustična gitara"
-                          className="w-full h-full object-cover object-top"
-                        />
-                      </div>
-                      <div>
-                        <div className="font-medium">Akustična gitara</div>
-                        <div className="text-sm text-gray-500">Klasični instrument</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center p-2 hover:bg-gray-50 rounded-lg cursor-pointer">
-                      <div className="w-12 h-12 bg-gray-200 rounded-md overflow-hidden mr-3">
-                        <img
-                          src="https://readdy.ai/api/search-image?query=electric%20guitar%20on%20clean%20white%20background%2C%20professional%20product%20photography%2C%20detailed%20craftsmanship%2C%20high%20resolution%2C%20studio%20lighting%2C%20isolated%20instrument&width=100&height=100&seq=3&orientation=squarish"
-                          alt="Električna gitara"
-                          className="w-full h-full object-cover object-top"
-                        />
-                      </div>
-                      <div>
-                        <div className="font-medium">Električna gitara</div>
-                        <div className="text-sm text-gray-500">Moderni zvuk</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center p-2 hover:bg-gray-50 rounded-lg cursor-pointer">
-                      <div className="w-12 h-12 bg-gray-200 rounded-md overflow-hidden mr-3">
-                        <img
-                          src="https://readdy.ai/api/search-image?query=piano%20keyboard%20on%20clean%20white%20background%2C%20professional%20product%20photography%2C%20detailed%20keys%2C%20high%20resolution%2C%20studio%20lighting%2C%20isolated%20instrument&width=100&height=100&seq=4&orientation=squarish"
-                          alt="Klavir"
-                          className="w-full h-full object-cover object-top"
-                        />
-                      </div>
-                      <div>
-                        <div className="font-medium">Klavir</div>
-                        <div className="text-sm text-gray-500">Elegantan i svestran</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
+  <div className="mt-4 bg-white rounded-lg shadow-lg p-4 max-h-72 overflow-y-auto">
+    <div className="text-sm text-gray-500 mb-2">
+      Rezultati pretrage za: <span className="font-semibold">{searchQuery}</span>
+    </div>
+    <div className="space-y-3">
+      {filteredInstruments.map((inst) => (
+  <div
+    key={inst.id}
+    className="flex items-center p-2 hover:bg-gray-50 rounded-lg cursor-pointer"
+    onClick={() => navigate(getCategoryRoute(inst.category))} // <-- OVDJE DODAJ
+  >
+    <div className="w-12 h-12 bg-gray-200 rounded-md overflow-hidden mr-3 flex-shrink-0">
+      <img
+        src={inst.img}
+        alt={inst.name}
+        className="w-full h-full object-cover object-top"
+      />
+    </div>
+    <div>
+      <div className="font-medium">{inst.name}</div>
+      <div className="text-sm text-gray-500">{inst.category}</div>
+    </div>
+  </div>
+))}
+    </div>
+  </div>
+)}
             </div>
           </div>
         </div>
