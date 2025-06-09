@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';  // <-- import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
-  const navigate = useNavigate();  // <-- dodaj useNavigate hook
+  const navigate = useNavigate();
 
+  // State za podatke forme
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -14,6 +15,7 @@ const Register = () => {
     agreeTerms: false,
   });
 
+  // State za greške u formi
   const [formErrors, setFormErrors] = useState({
     firstName: "",
     lastName: "",
@@ -24,6 +26,7 @@ const Register = () => {
     agreeTerms: "",
   });
 
+  // Promjena vrijednosti u formi
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -39,6 +42,7 @@ const Register = () => {
     }
   };
 
+  // Validacija forme
   const validateForm = () => {
     let isValid = true;
     const newErrors = { ...formErrors };
@@ -95,6 +99,7 @@ const Register = () => {
     return isValid;
   };
 
+  // Slanje forme za registraciju
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -146,8 +151,8 @@ const Register = () => {
           agreeTerms: false,
         });
 
-        // Ovdje dodajemo redirect na login stranicu
-        navigate('/login');  // <--- ovo prebacuje na login nakon registracije
+        // Redirect na login stranicu
+        navigate('/login');
       } else {
         alert("Došlo je do greške prilikom registracije.");
       }
@@ -162,6 +167,7 @@ const Register = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className="flex flex-col md:flex-row">
+            {/* Lijeva strana - pogodnosti */}
             <div className="md:w-1/2 bg-indigo-600 p-12 text-white">
               <h2 className="text-3xl font-bold mb-6">Pridružite nam se!</h2>
               <p className="mb-8">
@@ -188,6 +194,7 @@ const Register = () => {
               </div>
             </div>
 
+            {/* Desna strana - forma za registraciju */}
             <div className="md:w-1/2 p-12">
               <h2 className="text-3xl font-bold mb-6 text-gray-800">
                 Registracija

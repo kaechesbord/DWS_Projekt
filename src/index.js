@@ -7,16 +7,17 @@ import { BrowserRouter } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 
+// Glavni entry point aplikacije
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-  <CartProvider>
-    <BrowserRouter>
-      <AuthProvider>
+    <CartProvider>
+      <BrowserRouter>
+        <AuthProvider>
           <App />
-      </AuthProvider>
-    </BrowserRouter>
-  </CartProvider>
+        </AuthProvider>
+      </BrowserRouter>
+    </CartProvider>
   </React.StrictMode>
 );
 

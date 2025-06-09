@@ -1,30 +1,36 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { useCart } from '../context/CartContext.jsx';
 
+// Stranica za prikaz i upravljanje korpom
 export default function Korpa() {
   const { cartItems, increaseQuantity, decreaseQuantity, clearCart } = useCart();
   const [showThankYou, setShowThankYou] = useState(false);
 
+  // Izračun ukupne cijene
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
+  // Obrada kupovine
   const handlePurchase = () => {
-  setShowThankYou(true);
-  clearCart(); // Ovo prazni korpu!
-  setTimeout(() => {
-    setShowThankYou(false);
-  }, 3000);
-};
+    setShowThankYou(true);
+    clearCart(); // Prazni korpu nakon kupovine
+    setTimeout(() => {
+      setShowThankYou(false);
+    }, 3000);
+  };
+
   return (
     <>
       <Navbar />
       <div className="container mx-auto px-4 py-20 max-w-4xl relative">
         <h1 className="text-4xl font-bold mb-8 text-center">Vaša korpa</h1>
 
+        {/* Prikaz prazne korpe */}
         {cartItems.length === 0 ? (
           <div className="text-gray-600 text-lg text-center">Korpa je trenutno prazna.</div>
         ) : (
           <>
+            {/* Prikaz svih proizvoda u korpi */}
             <div className="space-y-6">
               {cartItems.map((item) => (
                 <div
@@ -39,7 +45,7 @@ export default function Korpa() {
                       <p className="text-indigo-600 font-medium mt-1">${item.price}</p>
                     </div>
                   </div>
-
+                  {/* Kontrole za količinu */}
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => decreaseQuantity(item.id)}
@@ -59,6 +65,7 @@ export default function Korpa() {
               ))}
             </div>
 
+            {/* Ukupno i dugme za kupovinu */}
             <div className="mt-10 text-right">
               <h2 className="text-2xl font-bold">Ukupno: ${total}</h2>
               <button
@@ -71,6 +78,7 @@ export default function Korpa() {
           </>
         )}
 
+        {/* Modal za zahvalnicu nakon kupovine */}
         {showThankYou && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="bg-white rounded-lg shadow-lg p-8 text-center max-w-sm">

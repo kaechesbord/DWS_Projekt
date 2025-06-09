@@ -8,8 +8,8 @@ import pearlExportImg from '../slike/DW_Design_Series.jpg';
 import rolandTD17Img from '../slike/Roland_TD-17KVX_Electronic_Drum_Kit.jpg';
 import mapexArmoryImg from '../slike/DW_DWe_4-Piece_Drum_Kit_Bundle.webp';
 import ModelViewer from '../components/ModelViewer.jsx';
-// --- Kraj uvoza slika ---
 
+// --- Podaci o bubnjevima ---
 const bubnjeviData = [
   {
     id: 'bubnjevi-1',
@@ -42,13 +42,16 @@ const bubnjeviData = [
   },
 ];
 
+// Stranica za prikaz bubnjeva
 export default function Bubnjevi() {
   const { cartItems, addToCart } = useCart();
   const [showModel, setShowModel] = useState(null);
 
+  // Klase za SoundWave dugme
   const soundwaveButtonClasses =
     "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200 inline-flex items-center justify-center";
 
+  // Ukupna cijena u korpi (nije prikazana, ali možeš koristiti po potrebi)
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
@@ -57,6 +60,7 @@ export default function Bubnjevi() {
       <div className="container mx-auto px-20 py-20">
         <h1 className="text-4xl font-bold mb-6">Bubnjevi</h1>
 
+        {/* Prikaz svih bubnjeva */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {bubnjeviData.map((bubanj) => (
             <div
@@ -66,6 +70,7 @@ export default function Bubnjevi() {
                 if (bubanj.modelPath) setShowModel(bubanj.modelPath);
               }}
             >
+              {/* Slika bubnja */}
               <div className="relative h-48 group-hover:h-72 rounded-t-lg overflow-hidden transition-all duration-300 ease-in-out">
                 <img
                   src={bubanj.img}
@@ -73,14 +78,13 @@ export default function Bubnjevi() {
                   className="w-full h-full object-cover object-top absolute top-0 left-0 transform group-hover:scale-[1.1] transition duration-300 ease-in-out"
                 />
               </div>
+              {/* Detalji bubnja */}
               <div className="p-6 flex flex-col flex-grow relative z-10 bg-white rounded-b-lg">
                 <div className="flex-grow min-h-[120px]">
                   <h3 className="text-xl font-semibold mb-2 text-gray-900">{bubanj.name}</h3>
                   <p className="text-gray-600 mb-4">{bubanj.description}</p>
                 </div>
-
                 <p className="text-indigo-600 font-medium mb-4">${bubanj.price}</p>
-
                 <button
                   onClick={e => {
                     e.stopPropagation(); // da ne otvara model na klik na dugme
@@ -95,7 +99,7 @@ export default function Bubnjevi() {
           ))}
         </div>
 
-        {/* Modal za prikaz ModelViewer-a */}
+        {/* Modal za prikaz 3D modela */}
         {showModel && (
           <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-4 max-w-2xl w-full">

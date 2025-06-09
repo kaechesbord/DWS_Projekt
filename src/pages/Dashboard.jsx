@@ -1,7 +1,11 @@
-// The exported code uses Tailwind CSS. Install Tailwind CSS in your dev environment to ensure all styles work.
-
+// Dashboard stranica za upravljanje instrumentima i kategorijama
+// Koristi Tailwind CSS za stilizaciju
 import React, { useState, useEffect } from 'react';
 import * as echarts from 'echarts';
+//--------------------------------------
+
+
+// --- Fiksne kategorije instrumenata ---
 const categories = [
     {
       id: 'gitare',
@@ -77,6 +81,9 @@ const categories = [
     }
   ];
 
+  //-------------------------
+
+  // --- Glavna komponenta Dashboard ---
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('nadzorna-ploca');
   const [searchQuery, setSearchQuery] = useState('');
@@ -94,14 +101,16 @@ const Dashboard = () => {
     description: ""
   });
 
-  // Kategorije instrumenata
-  
 
+  // Učitavanje instrumenata s backend servera
   useEffect(() => {
     fetch("http://localhost:5000/instruments")
       .then(res => res.json())
       .then(data => setInstruments(data));
   }, []);
+  
+  //------------------------
+
 
   // Statistički podaci
   const stats = [
@@ -110,6 +119,8 @@ const Dashboard = () => {
     { id: 'low', name: 'Niska zaliha', value: 18, icon: 'fa-exclamation-circle' },
     { id: 'best', name: 'Najprodavaniji', value: 24, icon: 'fa-crown' }
   ];
+
+  // --- Dodavanje novog instrumenta ---
 const handleInstrumentSubmit = async (e) => {
   e.preventDefault();
   await fetch("http://localhost:5000/instruments", {
@@ -117,14 +128,17 @@ const handleInstrumentSubmit = async (e) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(instrumentForm)
   });
+
+  //------------------------------ 
   // Osvježi instrumente
   const res = await fetch("http://localhost:5000/instruments");
   const data = await res.json();
   setInstruments(data);
   closeModal();
 };
-  // Funkcija za inicijalizaciju grafikona prodaje
-  // Echarts grafikon
+
+  //-----------------------------
+  // --- Echarts grafikon prodaje i zaliha ---
   useEffect(() => {
     const chartDom = document.getElementById('sales-chart');
     if (chartDom) {
@@ -399,6 +413,8 @@ const handleInstrumentSubmit = async (e) => {
 
       {/* Glavni sadržaj */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+
         {/* Naslov i traka za pretraživanje */}
         <div className="md:flex md:items-center md:justify-between mb-6">
           <div className="flex-1 min-w-0">
@@ -428,6 +444,7 @@ const handleInstrumentSubmit = async (e) => {
             </button>
           </div>
         </div>
+
 
         {/* Statistički widgeti */}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
@@ -461,6 +478,7 @@ const handleInstrumentSubmit = async (e) => {
           ))}
         </div>
 
+
         {/* Grafikon prodaje */}
         <div className="bg-white overflow-hidden shadow rounded-lg mb-8">
           <div className="p-6">
@@ -470,6 +488,7 @@ const handleInstrumentSubmit = async (e) => {
             <div id="sales-chart" className="h-80 w-full"></div>
           </div>
         </div>
+
 
         {/* Kategorije instrumenata */}
         <div className="mb-6">
@@ -533,6 +552,7 @@ const handleInstrumentSubmit = async (e) => {
             ))}
           </div>
         </div>
+         {/* Dodani instrumenti */}
             <div className="mb-8">
   <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">
     Dodani instrumenti
@@ -566,7 +586,6 @@ const handleInstrumentSubmit = async (e) => {
             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
               Količina: {inst.stock}
             </span>
-            {/* Ovdje možeš dodati dugmad za uređivanje/brisanje */}
           </div>
         </div>
       </div>

@@ -1,10 +1,14 @@
 import React, { createContext, useContext, useState } from "react";
 
+// Kreiraj kontekst za korpu
 export const CartContext = createContext();
 
+// Provider komponenta za korpu
 export const CartProvider = ({ children }) => {
+  // State za stavke u korpi
   const [cartItems, setCartItems] = useState([]);
 
+  // Dodaj proizvod u korpu (ili povećaj količinu ako već postoji)
   const addToCart = (item) => {
     setCartItems(prevItems => {
       const existing = prevItems.find(i => i.id === item.id);
@@ -17,6 +21,7 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  // Povećaj količinu proizvoda u korpi
   const increaseQuantity = (id) => {
     setCartItems(prevItems =>
       prevItems.map(item =>
@@ -25,6 +30,7 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  // Smanji količinu proizvoda u korpi (i ukloni ako je 0)
   const decreaseQuantity = (id) => {
     setCartItems(prevItems =>
       prevItems
@@ -35,8 +41,10 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  const clearCart = () => setCartItems([]); // Dodaj ovu liniju
+  // Isprazni korpu
+  const clearCart = () => setCartItems([]);
 
+  // Provider vraća sve funkcije i state
   return (
     <CartContext.Provider value={{ cartItems, addToCart, increaseQuantity, decreaseQuantity, clearCart }}>
       {children}
@@ -44,6 +52,6 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-// Custom hook za lakši import
+// Custom hook za lakši pristup korpi
 export const useCart = () => useContext(CartContext);
 

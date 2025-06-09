@@ -1,17 +1,20 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState } from 'react';
 
+// Kreiraj kontekst za autentikaciju
 export const AuthContext = createContext();
 
+// Provider komponenta za autentikaciju
 export const AuthProvider = ({ children }) => {
+  // State za korisnika (uzima iz localStorage ako postoji)
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem('user');
     return saved ? JSON.parse(saved) : null;
   });
 
+  // Da li je korisnik prijavljen
   const isAuthenticated = !!user;
 
-
-  
+  // Funkcija za login korisnika
   const login = async ({ email, password }) => {
     try {
       const res = await fetch(`http://localhost:5000/users?email=${email}`);
@@ -36,15 +39,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Funkcija za odjavu korisnika
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
   };
 
+  // Vraća context provider sa svim funkcijama i state-om
   return (
     <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
-

@@ -2,16 +2,19 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
+// Stranica za prijavu korisnika
 const Login = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
+  // State za formu i grešku
   const [form, setForm] = useState({
     usernameOrEmail: '',
     password: '',
   });
   const [error, setError] = useState('');
 
+  // Promjena vrijednosti u formi
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({
@@ -20,6 +23,7 @@ const Login = () => {
     }));
   };
 
+  // Slanje forme za prijavu
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -47,6 +51,7 @@ const Login = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className="flex flex-col md:flex-row">
+            {/* Lijeva strana - pogodnosti */}
             <div className="md:w-1/2 bg-indigo-600 p-12 text-white">
               <h2 className="text-3xl font-bold mb-6">Dobrodošli natrag!</h2>
               <p className="mb-8">
@@ -69,6 +74,7 @@ const Login = () => {
               </div>
             </div>
 
+            {/* Desna strana - forma za prijavu */}
             <div className="md:w-1/2 p-12">
               <h2 className="text-3xl font-bold mb-6 text-gray-800">Prijava</h2>
               <form className="space-y-6" onSubmit={handleSubmit}>

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
+// Stranica s recenzijama korisnika
 const Testimonials = () => {
   const { isAuthenticated } = useContext(AuthContext);
 
@@ -23,21 +24,23 @@ const Testimonials = () => {
     },
   ];
 
+  // State za prikaz forme, unos recenzije i ocjene
   const [showForm, setShowForm] = useState(false);
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState(0);
   const [success, setSuccess] = useState(false);
 
+  // Klik na zvjezdicu
   const handleStarClick = (star) => setRating(star);
 
+  // Slanje recenzije na backend
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Pošalji recenziju na backend (json-server)
     await fetch("http://localhost:5000/testimonials", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        name: "Anonimni korisnik", // ili zamijeni s imenom ako imaš
+        name: "Anonimni korisnik",
         text: reviewText,
         rating,
         date: new Date().toISOString()
@@ -53,6 +56,7 @@ const Testimonials = () => {
   return (
     <section className="bg-white py-12 px-4 max-w-4xl mx-auto rounded-lg shadow-md mt-12">
       <h2 className="text-2xl font-semibold text-left mb-8 text-indigo-600">Šta kažu naši korisnici</h2>
+      {/* Prikaz fiksnih recenzija */}
       <div className="space-y-8">
         {reviews.map(({ id, name, text }) => (
           <blockquote key={id} className="border-l-4 border-indigo-600 pl-6 italic text-gray-700">
@@ -61,6 +65,7 @@ const Testimonials = () => {
           </blockquote>
         ))}
       </div>
+      {/* Forma za dodavanje recenzije (samo za prijavljene korisnike) */}
       {isAuthenticated && (
         <div className="flex flex-col items-start mt-11">
           <button

@@ -1,13 +1,16 @@
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faHandshake, faHeart } from "@fortawesome/free-regular-svg-icons";
-import React, { useState } from "react";
 import { faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import Navbar from "../components/Navbar";
+
+// Stranica "O nama"
 const About = () => {
   return (
     <div className="min-h-screen bg-gray-50 pt-20">
       <Navbar />
-      {/* Hero Section */}
+
+      {/* Hero sekcija */}
       <section className="relative overflow-hidden bg-indigo-600 py-20">
         <div className="absolute inset-0">
           <img
@@ -25,7 +28,8 @@ const About = () => {
           </div>
         </div>
       </section>
-      {/* Our Story Section */}
+
+      {/* Naša priča */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
@@ -45,16 +49,18 @@ const About = () => {
           </div>
         </div>
       </section>
-      {/* Values Section */}
+
+      {/* Vrijednosti */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
             Naše Vrijednosti
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Kvaliteta */}
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i className="fas fa-star text-2xl text-indigo-600"><FontAwesomeIcon icon={faStar} /></i>
+                <FontAwesomeIcon icon={faStar} className="text-2xl text-indigo-600" />
               </div>
               <h3 className="text-xl font-semibold mb-4">Kvaliteta</h3>
               <p className="text-gray-600">
@@ -62,9 +68,10 @@ const About = () => {
                 vrhunske kvalitete.
               </p>
             </div>
+            {/* Stručnost */}
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i className="fas fa-hands-helping text-2xl text-indigo-600"><FontAwesomeIcon icon={faHandshake}/></i>
+                <FontAwesomeIcon icon={faHandshake} className="text-2xl text-indigo-600" />
               </div>
               <h3 className="text-xl font-semibold mb-4">Stručnost</h3>
               <p className="text-gray-600">
@@ -72,9 +79,10 @@ const About = () => {
                 savjete.
               </p>
             </div>
+            {/* Strast */}
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i className="fas fa-heart text-2xl text-indigo-600"><FontAwesomeIcon icon={faHeart}/></i>
+                <FontAwesomeIcon icon={faHeart} className="text-2xl text-indigo-600" />
               </div>
               <h3 className="text-xl font-semibold mb-4">Strast</h3>
               <p className="text-gray-600">
@@ -85,11 +93,13 @@ const About = () => {
           </div>
         </div>
       </section>
-      {/* Team Section */}
+
+      {/* Tim */}
       <section className="py-16">
         <div className="container mx-auto px-3">
           <h2 className="text-3xl font-bold text-center mb-12">Naš Tim</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Član tima 1 */}
             <div className="text-center">
               <div className="mb-6 relative">
                 <img
@@ -102,13 +112,14 @@ const About = () => {
               <p className="text-gray-600 mb-2">CEO</p>
               <div className="flex justify-center space-x-3">
                 <a href="#" className="text-gray-400 hover:text-indigo-600">
-                  <i className="fab fa-linkedin"><FontAwesomeIcon icon={faLinkedin} /></i>
+                  <FontAwesomeIcon icon={faLinkedin} />
                 </a>
                 <a href="#" className="text-gray-400 hover:text-indigo-600">
-                  <i className="fab fa-twitter"><FontAwesomeIcon icon={faTwitter} /></i>
+                  <FontAwesomeIcon icon={faTwitter} />
                 </a>
               </div>
             </div>
+            {/* Član tima 2 */}
             <div className="text-center">
               <div className="mb-6 relative">
                 <img
@@ -121,13 +132,14 @@ const About = () => {
               <p className="text-gray-600 mb-2">Marketing Director</p>
               <div className="flex justify-center space-x-3">
                 <a href="#" className="text-gray-400 hover:text-indigo-600">
-                  <i className="fab fa-linkedin"><FontAwesomeIcon icon={faLinkedin} /></i>
+                  <FontAwesomeIcon icon={faLinkedin} />
                 </a>
                 <a href="#" className="text-gray-400 hover:text-indigo-600">
-                  <i className="fab fa-twitter"><FontAwesomeIcon icon={faTwitter} /></i>
+                  <FontAwesomeIcon icon={faTwitter} />
                 </a>
               </div>
             </div>
+            {/* Član tima 3 */}
             <div className="text-center">
               <div className="mb-6 relative">
                 <img
@@ -140,17 +152,18 @@ const About = () => {
               <p className="text-gray-600 mb-2">Technical Expert</p>
               <div className="flex justify-center space-x-3">
                 <a href="#" className="text-gray-400 hover:text-indigo-600">
-                  <i className="fab fa-linkedin"><FontAwesomeIcon icon={faLinkedin} /></i>
+                  <FontAwesomeIcon icon={faLinkedin} />
                 </a>
                 <a href="#" className="text-gray-400 hover:text-indigo-600">
-                  <i className="fab fa-twitter"><FontAwesomeIcon icon={faTwitter} /></i>
+                  <FontAwesomeIcon icon={faTwitter} />
                 </a>
               </div>
             </div>
           </div>
         </div>
       </section>
-      {/* Stats Section */}
+
+      {/* Statistika */}
       <section className="py-16 bg-indigo-600">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -176,4 +189,5 @@ const About = () => {
     </div>
   );
 };
+
 export default About;

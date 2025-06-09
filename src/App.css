@@ -1,18 +1,22 @@
+/* Glavni kontejner aplikacije */
 .App {
   text-align: center;
 }
 
+/* Stil za React logo */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
+/* Animacija za logo (samo ako korisnik ne preferira smanjene animacije) */
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
 
+/* Header sekcija aplikacije */
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -24,10 +28,12 @@
   color: white;
 }
 
+/* Linkovi u aplikaciji */
 .App-link {
   color: #61dafb;
 }
 
+/* Keyframes za animaciju rotacije loga */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
