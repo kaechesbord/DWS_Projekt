@@ -62,6 +62,13 @@ Pokrenite razvojni server:
 
 npm run dev ILI
 npm start
+
+```
+2. Pokretanje servera:
+```bash
+npm install -g json-server   
+npx json-server --watch db.json --port 5000
+```
 Otvorite u pretraživaču:
 
 
