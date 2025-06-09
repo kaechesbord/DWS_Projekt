@@ -15,6 +15,7 @@ import AudioOprema from './pages/AudioOprema';
 import Bubnjevi from './pages/Bubnjevi';
 import Korpa from './pages/Korpa'; // New: Import the cart page
 import PotvrdaKupovine from './pages/PotvrdaKupovine';
+import Dashboard from './pages/Dashboard'; // New: Import the dashboard page
 
 // Import the Navbar component
 import Navbar from './components/Navbar';
@@ -28,12 +29,11 @@ import { CartProvider } from './context/CartContext';
 // import { CartProvider } from './context/CartContext.jsx'; // Only if NOT in main.jsx
 
 
-// ...existing code...
-
 function App() {
   return (
     <>
       <Navbar />
+      <div className="pt-20">
       <Routes>
   {/* Javne rute */}
   <Route path="/" element={<Home />} />
@@ -51,7 +51,11 @@ function App() {
     <Route path="/korpa" element={<Korpa />} />
     <Route path="/potvrda-kupovine" element={<PotvrdaKupovine />} />
   </Route>
+  <Route element={<ProtectedRoute allowedRoles={['Admin']} />}>
+  <Route path="/dashboard" element={<Dashboard />} />
+</Route>
 </Routes>
+</div>
     </>
   );
 }

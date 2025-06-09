@@ -6,9 +6,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logout } = useContext(AuthContext);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+   const toggleMenu = () => setIsMenuOpen((prev) => !prev)
 
   const handleLogout = () => {
     logout();
@@ -18,6 +16,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+        
         <div className="flex items-center">
           <Link to="/" className="text-2xl font-bold text-indigo-600">
             SoundWave
@@ -26,9 +25,17 @@ const Navbar = () => {
 
         {/* User role indicator */}
         <div className="hidden md:flex items-center mr-4">
-          <span className="text-sm bg-gray-100 px-3 py-1 rounded-full">
-            {user ? (user.role === 'Admin' ? 'Administrator' : 'Korisnik') : 'Gost'}
-          </span>
+          <span
+  className={`text-sm px-3 py-1 rounded-full ${
+    user
+      ? user.role === 'Admin'
+        ? 'bg-yellow-200 text-yellow-800 font-bold'
+        : 'bg-gray-100 text-gray-700'
+      : 'bg-gray-100 text-gray-700'
+  }`}
+>
+  {user ? (user.role === 'Admin' ? 'Administrator' : 'Korisnik') : 'Gost'}
+</span>
         </div>
 
         {/* Desktop navigation */}
@@ -58,6 +65,9 @@ const Navbar = () => {
           <Link to="/korpa" className="font-medium hover:text-indigo-600 transition-colors flex items-center">
             <img src="https://cdn0.iconfinder.com/data/icons/minimal-set-seven/32/minimal-49-512.png" alt="Korpa" className="w-6 h-6 mr-2 " />
           </Link> 
+          {user && user.role === 'Admin' && (
+  <Link to="/dashboard" className="font-medium hover:text-indigo-600 transition-colors">Dashboard</Link>
+)}
         </div>
 
         {/* Mobile menu button */}

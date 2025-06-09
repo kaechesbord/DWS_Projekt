@@ -41,26 +41,7 @@ const Contact = () => {
   return (
     <>
     <Navbar/>
-    <div className="min-h-screen bg-white font-sans">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6">
-        <div className="container mx-auto px-6">
-          <nav className="flex justify-between items-center">
-            <div className="text-2xl font-bold">CompanyName</div>
-            <div className="hidden md:flex space-x-8">
-              <a href="#" className="hover:text-blue-200 transition duration-300 cursor-pointer">Početna</a>
-              <a href="#" className="hover:text-blue-200 transition duration-300 cursor-pointer">O nama</a>
-              <a href="#" className="hover:text-blue-200 transition duration-300 cursor-pointer">Usluge</a>
-              <a href="#" className="hover:text-blue-200 transition duration-300 cursor-pointer font-semibold">Kontakt</a>
-            </div>
-            <div className="md:hidden">
-              <button className="text-white focus:outline-none cursor-pointer !rounded-button whitespace-nowrap">
-                <i className="fas fa-bars text-xl"></i>
-              </button>
-            </div>
-          </nav>
-        </div>
-      </header>
+    
 
       {/* Hero Section */}
       <div className="relative py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
@@ -247,16 +228,23 @@ const Contact = () => {
 
       {/* Map Section */}
       <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">Gdje nas možete pronaći</h2>
-          <div className="w-full h-96 bg-gray-300 rounded-lg overflow-hidden">
-            {/* Map would be integrated here */}
-            <div className="w-full h-full flex items-center justify-center bg-gray-200">
-              <p className="text-gray-600">Ovdje bi bila integrirana Google mapa</p>
-            </div>
-          </div>
-        </div>
-      </section>
+  <div className="container mx-auto px-6">
+    <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">Gdje nas možete pronaći</h2>
+    <div className="w-full h-96 bg-gray-300 rounded-lg overflow-hidden">
+      <iframe
+        title="Google mapa"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2781.697964439624!2d15.96496331556753!3d45.81302897910601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4765d6f6e3e1e5e7%3A0x7e6b6e6e6e6e6e6e!2sIlica%20123%2C%2010000%2C%20Zagreb!5e0!3m2!1shr!2shr!4v1680000000000!5m2!1shr!2shr"
+        width="100%"
+        height="100%"
+        style={{ border: 0 }}
+        allowFullScreen=""
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        className="w-full h-full"
+      ></iframe>
+    </div>
+  </div>
+</section>
 
       {/* FAQ Section */}
       <section className="py-16 bg-white">
@@ -362,7 +350,6 @@ const Contact = () => {
           </div>
         </div>
       </footer>
-    </div>
     </>
   );
 };
