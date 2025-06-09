@@ -103,12 +103,12 @@ const About = () => {
             <div className="text-center">
               <div className="mb-6 relative">
                 <img
-                  src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20confident%20middle%20aged%20man%20in%20business%20casual%20attire%2C%20warm%20lighting%2C%20neutral%20background%2C%20friendly%20smile%2C%20high%20quality%20portrait&width=300&height=300&seq=10&orientation=squarish"
+                  src="https://media.licdn.com/dms/image/v2/D4D03AQHQBI5iQfp2PA/profile-displayphoto-shrink_200_200/B4DZRC20eQHUAY-/0/1736288455533?e=2147483647&v=beta&t=W8y4vwdk36CdMjgJ8WnnUxYARucVQGpAzTyItZzZqT0"
                   alt="CEO"
                   className="w-48 h-48 rounded-full mx-auto object-cover object-top"
                 />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Marko Horvat</h3>
+              <h3 className="text-xl font-semibold mb-2">Damir Lihtner</h3>
               <p className="text-gray-600 mb-2">CEO</p>
               <div className="flex justify-center space-x-3">
                 <a href="#" className="text-gray-400 hover:text-indigo-600">
@@ -123,13 +123,13 @@ const About = () => {
             <div className="text-center">
               <div className="mb-6 relative">
                 <img
-                  src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20woman%20in%20business%20casual%20attire%2C%20warm%20lighting%2C%20neutral%20background%2C%20friendly%20smile%2C%20high%20quality%20portrait&width=300&height=300&seq=11&orientation=squarish"
+                  src="https://cdn.discordapp.com/attachments/1372645046746353725/1381709191592546304/IMG_20250609_205833.png?ex=68488076&is=68472ef6&hm=a789e9af82645fae18abb0577c0e780e4560495d130851087a1b70dc39ecb303&"
                   alt="Marketing Director"
                   className="w-48 h-48 rounded-full mx-auto object-cover object-top"
                 />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Ana Kovačić</h3>
-              <p className="text-gray-600 mb-2">Marketing Director</p>
+              <h3 className="text-xl font-semibold mb-2">Azam Hasičić</h3>
+              <p className="text-gray-600 mb-2">Čuvar Tajni</p>
               <div className="flex justify-center space-x-3">
                 <a href="#" className="text-gray-400 hover:text-indigo-600">
                   <FontAwesomeIcon icon={faLinkedin} />
@@ -143,13 +143,13 @@ const About = () => {
             <div className="text-center">
               <div className="mb-6 relative">
                 <img
-                  src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20middle%20aged%20man%20with%20glasses%20in%20business%20casual%20attire%2C%20warm%20lighting%2C%20neutral%20background%2C%20friendly%20smile%2C%20high%20quality%20portrait&width=300&height=300&seq=12&orientation=squarish"
+                  src="https://cdn.discordapp.com/attachments/1372645046746353725/1381719234173866174/9554c2a8-4d13-4829-85df-2476f2885499.jpg?ex=684889d0&is=68473850&hm=c199d07031a7a862e9df296deb69500af601e5a355fbc93cc98fb9e50ea1b2d5&"
                   alt="Technical Expert"
                   className="w-48 h-48 rounded-full mx-auto object-cover object-top"
                 />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Ivan Novak</h3>
-              <p className="text-gray-600 mb-2">Technical Expert</p>
+              <h3 className="text-xl font-semibold mb-2">Muhamed Talić</h3>
+              <p className="text-gray-600 mb-2">Expert Prodaje i Biofizike</p>
               <div className="flex justify-center space-x-3">
                 <a href="#" className="text-gray-400 hover:text-indigo-600">
                   <FontAwesomeIcon icon={faLinkedin} />
