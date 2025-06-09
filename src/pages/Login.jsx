@@ -36,7 +36,7 @@ const Login = () => {
 
     if (result.success) {
       alert('Prijava uspješna!');
-      navigate('/korpa');
+      navigate('/');
     } else {
       setError(result.message || 'Neispravno korisničko ime/email ili lozinka.');
     }

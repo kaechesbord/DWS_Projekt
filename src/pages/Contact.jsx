@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 
-const Kontakt = () => {
+const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -367,4 +367,4 @@ const Kontakt = () => {
   );
 };
 
-export default Kontakt;
+export default Contact;

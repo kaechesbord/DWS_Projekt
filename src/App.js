@@ -18,6 +18,7 @@ import PotvrdaKupovine from './pages/PotvrdaKupovine';
 
 // Import the Navbar component
 import Navbar from './components/Navbar';
+import { CartProvider } from './context/CartContext';
 
 // Import the CartProvider – it should wrap your Routes in main.jsx,
 // but we still need to remind ourselves it's part of the global setup.
@@ -33,22 +34,20 @@ function App() {
   return (
     <>
       <Navbar />
-<Routes>
+      <Routes>
   {/* Javne rute */}
   <Route path="/" element={<Home />} />
   <Route path="/about" element={<About />} />
-  <Route path="/gitare" element={<Gitare />} />
-  <Route path="/klavijature" element={<Klavijature />} />
-  <Route path="/bubnjevi" element={<Bubnjevi />} />
-  <Route path="/audio-oprema" element={<AudioOprema />} />
-  <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
   <Route path="/login" element={<Login />} />
   <Route path="/registracija" element={<Register />} />
 
-  {/* Zaštićene rute - pristup samo ako je korisnik prijavljen */}
-  <Route path="/login" element={<Login />} />
-  
+  {/* Zaštićene rute */}
   <Route element={<ProtectedRoute />}>
+    <Route path="/contact" element={<Contact />} />
+    <Route path="/klavijature" element={<Klavijature />} />
+    <Route path="/bubnjevi" element={<Bubnjevi />} />
+    <Route path="/audio-oprema" element={<AudioOprema />} />
+    <Route path="/gitare" element={<Gitare />} />
     <Route path="/korpa" element={<Korpa />} />
     <Route path="/potvrda-kupovine" element={<PotvrdaKupovine />} />
   </Route>

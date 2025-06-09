@@ -55,6 +55,9 @@ const Navbar = () => {
               </button>
             </>
           )}
+          <Link to="/korpa" className="font-medium hover:text-indigo-600 transition-colors flex items-center">
+            <img src="https://cdn0.iconfinder.com/data/icons/minimal-set-seven/32/minimal-49-512.png" alt="Korpa" className="w-6 h-6 mr-2 " />
+          </Link> 
         </div>
 
         {/* Mobile menu button */}
@@ -94,7 +97,7 @@ const Navbar = () => {
             {user && (
               <>
                 <span className="font-medium text-gray-700 py-2 border-b border-gray-100">
-                  Pozdrav, {user.email}
+                  Pozdrav, {user.username}
                 </span>
                 <button
                   onClick={handleLogout}
@@ -104,7 +107,9 @@ const Navbar = () => {
                 </button>
               </>
             )}
-
+            <Link to="/korpa" onClick={() => setIsMenuOpen(false)} className="font-medium hover:text-indigo-600 transition-colors py-2 flex items-center">
+  <img src="https://cdn0.iconfinder.com/data/icons/minimal-set-seven/32/minimal-49-512.png" alt="Korpa" className="w-6 h-6 mr-2" />
+</Link>
             <div className="flex items-center py-2">
               <span className="text-sm bg-gray-100 px-3 py-1 rounded-full">
                 {user ? (user.role === 'Admin' ? 'Administrator' : 'Korisnik') : 'Gost'}
