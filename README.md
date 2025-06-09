@@ -1,7 +1,7 @@
 # 🎸 Prodavnica Muzičkih Instrumenata
 
 Ovo je web aplikacija za online prodaju muzičkih instrumenata. Korisnici mogu pregledati ponudu instrumenata, dodati proizvode u korpu, kreirati nalog i izvršiti kupovinu.
-![Hero naslovne stranice aplikacije](slike/hero)
+![Hero naslovne stranice aplikacije](src/slike/hero.png)
 ---
 
 ## 🛠️ Tehnologije korištene u projektu
@@ -9,7 +9,7 @@ Ovo je web aplikacija za online prodaju muzičkih instrumenata. Korisnici mogu p
 - **React** – za kreiranje korisničkog interfejsa
 - **Tailwind CSS** – za brzu i responzivnu stilizaciju
 - **THREE JS** – za 3D prikaz instrumenata prije kupovine
-![3D Prikaz:](slike/jednazaridmija)
+![3D Prikaz:](src/slike/jednazaridmija.png)
 ---
 
 ## 📁 Struktura projekta
@@ -39,11 +39,11 @@ Edit
   - Mogućnost pregleda instrumenata
   - Pregled i upravljanje korpom
   - Započinjanje i finalizacija kupovine
-![Odabir tipa instrumenta:](slike/zaridmija)
+![Odabir tipa instrumenta:](src/slike/zaridmija.png)
 - **Admin (buduće proširenje):**
   - Dodavanje/brisanje proizvoda
   - Upravljanje narudžbama i korisnicima
-![Izgled Dashboarda:](slike/zaridmija2)
+![Izgled Dashboarda:](src/slike/zaridmija2)
 ---
 
 ## ▶️ Upute za pokretanje projekta lokalno
