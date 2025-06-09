@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { useCart } from '../context/CartContext.jsx';
 
@@ -7,6 +7,7 @@ import fenderImg from '../slike/fender.jpg';
 import gibsonImg from '../slike/gibson.jpg';
 import ibanezImg from '../slike/ibanez.webp';
 import yamahaImg from '../slike/yamaha.webp';
+import ModelViewer from '../components/ModelViewer.jsx';
 
 // --- Podaci o gitarama ---
 const guitarsData = [
@@ -30,6 +31,7 @@ const guitarsData = [
     description: 'Brza gitara za metal i shred tehniku',
     price: 900,
     img: ibanezImg,
+    modelPath: "/models/ibanez_jem_guitar.glb", //3D model
   },
   {
     id: 'gitare-4',
@@ -43,7 +45,7 @@ const guitarsData = [
 // Stranica za prikaz gitara
 export default function Gitare() {
   const { addToCart } = useCart();
-
+const [showModel, setShowModel] = useState(null);
   // Klase za SoundWave dugme
   const buttonClasses =
     "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200 inline-flex items-center justify-center";
@@ -59,6 +61,9 @@ export default function Gitare() {
           {guitarsData.map((guitar) => (
             <div
               key={guitar.id}
+               onClick={() => {
+                if (guitar.modelPath) setShowModel(guitar.modelPath);
+              }}
               className="border rounded-lg shadow hover:shadow-lg transition cursor-pointer flex flex-col overflow-hidden transform hover:scale-[1.03] duration-300 ease-in-out group"
             >
               {/* Slika gitare */}
@@ -87,6 +92,19 @@ export default function Gitare() {
             </div>
           ))}
         </div>
+          {showModel && (
+                  <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg p-4 max-w-2xl w-full">
+                      <ModelViewer modelPath={showModel} />
+                      <button
+                        onClick={() => setShowModel(null)}
+                        className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded"
+                      >
+                        Zatvori
+                      </button>
+                    </div>
+                  </div>
+                )}
       </div>
     </>
   );
