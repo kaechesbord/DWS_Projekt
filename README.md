@@ -43,7 +43,7 @@ Edit
 - **Admin (buduće proširenje):**
   - Dodavanje/brisanje proizvoda
   - Upravljanje narudžbama i korisnicima
-![Izgled Dashboarda:](src/slike/zaridmija2)
+![Izgled Dashboarda:](src/slike/zaridmija2.png)
 ---
 
 ## ▶️ Upute za pokretanje projekta lokalno
