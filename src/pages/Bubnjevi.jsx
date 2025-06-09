@@ -8,6 +8,7 @@ import pearlExportImg from '../slike/DW_Design_Series.jpg';
 import rolandTD17Img from '../slike/Roland_TD-17KVX_Electronic_Drum_Kit.jpg';
 
 import mapexArmoryImg from '../slike/DW_DWe_4-Piece_Drum_Kit_Bundle.webp';
+import ModelViewer from '../components/ModelViewer.jsx';
 // --- Kraj uvoza slika ---
 
 const bubnjeviData = [
@@ -17,6 +18,7 @@ const bubnjeviData = [
     description: 'Profesionalni bubnjevi s bogatim i punim tonom, savršeni za studio i pozornicu.',
     price: 2500,
     img: tamaStarclassicImg,
+    modelPath:"../models/drum_kit.glb", // Putanja do 3D modela bubnjeva
   },
   {
     id: 'bubnjevi-2',
@@ -58,6 +60,7 @@ export default function Bubnjevi() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {bubnjeviData.map((bubanj) => (
             <div
+            onClick={ <ModelViewer modelPath={bubanj.modelPath} />}
               key={bubanj.id}
               className="border rounded-lg shadow hover:shadow-lg transition cursor-pointer flex flex-col overflow-hidden transform hover:scale-[1.03] duration-300 ease-in-out group"
             >
