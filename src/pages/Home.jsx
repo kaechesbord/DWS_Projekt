@@ -235,21 +235,18 @@ const Home = () => {
               <h3 className="text-xl font-bold mb-4">Brzi linkovi</h3>
               <ul className="space-y-2">
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Početna</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">O nama</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Prijava</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Kontakt</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">O nama</a></li>
+                <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors">Kontakt</a></li>
               </ul>
             </div>
 
             <div>
               <h3 className="text-xl font-bold mb-4">Kategorije</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Gitare</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Klavijature</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Bubnjevi i perkusije</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Audio oprema</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Dodatna oprema</a></li>
+                <li><a href="/gitare" className="text-gray-400 hover:text-white transition-colors">Gitare</a></li>
+                <li><a href="/klavijature" className="text-gray-400 hover:text-white transition-colors">Klavijature</a></li>
+                <li><a href="/bubnjevi" className="text-gray-400 hover:text-white transition-colors">Bubnjevi i perkusije</a></li>
+                <li><a href="/audio-oprema" className="text-gray-400 hover:text-white transition-colors">Audio oprema</a></li>
               </ul>
             </div>
 
@@ -278,9 +275,6 @@ const Home = () => {
                 &copy; 2025 SoundWave. Sva prava pridržana.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Pravila privatnosti</a>
-                <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Uvjeti korištenja</a>
-                <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Kolačići</a>
               </div>
             </div>
           </div>

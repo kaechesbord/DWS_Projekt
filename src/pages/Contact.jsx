@@ -20,23 +20,29 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here would be the actual form submission logic
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    
-    // Reset form after submission
-    setTimeout(() => {
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-      setSubmitted(false);
-    }, 3000);
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  // Pošalji podatke na backend
+  await fetch("http://localhost:5000/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData),
+  });
+
+  setSubmitted(true);
+
+  // Reset form after submission
+  setTimeout(() => {
+    setFormData({
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    });
+    setSubmitted(false);
+  }, 3000);
+};
 
   return (
     <>

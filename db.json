@@ -32,7 +32,15 @@
       "role": "Admin"
     }
   ],
-  "messages": [],
+  "messages": [
+    {
+      "id": "2f10",
+      "name": "Azam",
+      "email": "Azam.hasicic@gmail.com",
+      "subject": "O gitaram",
+      "message": "Tako nesto slicno"
+    }
+  ],
   "instruments": [
     {
       "id": "48ef",
@@ -51,6 +59,15 @@
       "stock": "2",
       "code": "3",
       "description": "2"
+    },
+    {
+      "id": "e4c0",
+      "name": "FRA",
+      "category": "klaviri",
+      "price": "51",
+      "stock": "5",
+      "code": "M32",
+      "description": "ssss"
     }
   ]
 }
