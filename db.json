@@ -30,6 +30,14 @@
       "username": "admin",
       "password": "admin123",
       "role": "Admin"
+    },
+    {
+      "id": "5d00",
+      "firstName": "Damir ",
+      "lastName": "Lihtner",
+      "email": "Damir.Lihtner@gmail.com",
+      "username": "Damir22",
+      "password": "12345678"
     }
   ],
   "messages": [
@@ -39,6 +47,13 @@
       "email": "Azam.hasicic@gmail.com",
       "subject": "O gitaram",
       "message": "Tako nesto slicno"
+    },
+    {
+      "id": "1654",
+      "name": "Messi",
+      "email": "Messi.Ronaldo@gmail.com",
+      "subject": "Bubanj",
+      "message": "Dobar Vam bubanj"
     }
   ],
   "instruments": [
@@ -68,6 +83,59 @@
       "stock": "5",
       "code": "M32",
       "description": "ssss"
+    },
+    {
+      "id": "1756",
+      "name": "Bas",
+      "category": "bubnjevi",
+      "price": "100000",
+      "stock": "3",
+      "code": "A22",
+      "description": "Odlican"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "335c",
+      "name": "Anonimni korisnik",
+      "text": "Odlicna stranica!!!",
+      "rating": 5,
+      "date": "2025-06-09T16:44:31.074Z"
+    },
+    {
+      "id": "b42c",
+      "name": "Anonimni korisnik",
+      "text": "Predobra aplikacija!!!",
+      "rating": 5,
+      "date": "2025-06-09T16:45:13.937Z"
+    },
+    {
+      "id": "e906",
+      "name": "Anonimni korisnik",
+      "text": "Odlicna gitara, sve preporuke :)",
+      "rating": 5,
+      "date": "2025-06-09T16:47:03.600Z"
+    },
+    {
+      "id": "9fb5",
+      "name": "Anonimni korisnik",
+      "text": "sadsad",
+      "rating": 5,
+      "date": "2025-06-09T16:49:39.158Z"
+    },
+    {
+      "id": "9479",
+      "name": "Anonimni korisnik",
+      "text": "Valjka ba ",
+      "rating": 5,
+      "date": "2025-06-09T16:51:52.833Z"
+    },
+    {
+      "id": "1e8e",
+      "name": "Anonimni korisnik",
+      "text": "dasdsadas",
+      "rating": 5,
+      "date": "2025-06-09T16:54:47.717Z"
     }
   ]
 }

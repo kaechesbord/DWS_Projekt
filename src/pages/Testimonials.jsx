@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 const Testimonials = () => {
   const { isAuthenticated } = useContext(AuthContext);
 
+  // Fiksne recenzije koje se uvijek prikazuju
   const reviews = [
     {
       id: 1,
@@ -25,16 +26,28 @@ const Testimonials = () => {
   const [showForm, setShowForm] = useState(false);
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState(0);
+  const [success, setSuccess] = useState(false);
 
   const handleStarClick = (star) => setRating(star);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Ovdje možeš dodati logiku za slanje recenzije na backend
-    alert(`Recenzija: ${reviewText}\nOcjena: ${rating} zvjezdica`);
+    // Pošalji recenziju na backend (json-server)
+    await fetch("http://localhost:5000/testimonials", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: "Anonimni korisnik", // ili zamijeni s imenom ako imaš
+        text: reviewText,
+        rating,
+        date: new Date().toISOString()
+      }),
+    });
     setShowForm(false);
     setReviewText('');
     setRating(0);
+    setSuccess(true);
+    setTimeout(() => setSuccess(false), 3000);
   };
 
   return (
@@ -87,6 +100,9 @@ const Testimonials = () => {
                 Pošalji
               </button>
             </form>
+          )}
+          {success && (
+            <div className="text-green-600 mt-2">Recenzija je uspješno poslana!</div>
           )}
         </div>
       )}

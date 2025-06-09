@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { AuthContext } from '../context/AuthContext';
-import Testimonials from '../components/Testimonials';
+import Testimonials from './Testimonials';
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');

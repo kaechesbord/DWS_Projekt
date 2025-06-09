@@ -10,6 +10,8 @@ export const AuthProvider = ({ children }) => {
 
   const isAuthenticated = !!user;
 
+
+  
   const login = async ({ email, password }) => {
     try {
       const res = await fetch(`http://localhost:5000/users?email=${email}`);

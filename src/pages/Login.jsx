@@ -82,7 +82,7 @@ const Login = () => {
                     value={form.usernameOrEmail}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg border-none bg-gray-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                    placeholder="Unesite email ili korisničko ime"
+                    placeholder="Unesite email"
                     required
                   />
                 </div>
