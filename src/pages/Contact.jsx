@@ -215,7 +215,7 @@ const Contact = () => {
                       required
                     />
                     <label htmlFor="privacy" className="ml-2 block text-sm text-gray-700">
-                      Slažem se s <a href="#" className="text-blue-600 hover:underline">politikom privatnosti</a> i obradom osobnih podataka
+                      Slažem se s politikom privatnosti i obradom osobnih podataka
                     </label>
                   </div>
                   
@@ -293,9 +293,8 @@ const Contact = () => {
             <div>
               <h3 className="text-xl font-semibold mb-4">Brzi linkovi</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Početna</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition duration-300 cursor-pointer">O nama</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Usluge</a></li>
+                <li><a href="http://localhost:3001/" className="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Početna</a></li>
+                <li><a href="/about" className="text-gray-400 hover:text-white transition duration-300 cursor-pointer">O nama</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Kontakt</a></li>
               </ul>
             </div>
@@ -331,7 +330,7 @@ const Contact = () => {
                   type="submit" 
                   className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-lg transition duration-300 cursor-pointer !rounded-button whitespace-nowrap"
                 >
-                  Prijava
+                  Posalji
                 </button>
               </form>
             </div>
