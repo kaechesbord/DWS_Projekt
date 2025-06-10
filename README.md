@@ -12,6 +12,12 @@ Ovo je web aplikacija za online prodaju muzičkih instrumenata. Korisnici mogu p
 ![3D Prikaz:](src/slike/jednazaridmija.png)
 ---
 
+## Uloge članova u izradi?
+Damir: Stranice, 3D prikaz modela, Dashboard.<br>
+Azam: Autentifikacija korisnika, baza podataka, Dashboard<br>
+Muhamed: Korpa, proizvodi, recenzije
+
+
 ## 📁 Struktura projekta
 
 src/
@@ -23,9 +29,6 @@ src/
 ├── App.jsx # Glavna komponenta aplikacije
 └── main.jsx # Ulazna tačka aplikacije
 
-yaml
-Copy
-Edit
 
 ---
 
@@ -36,6 +39,7 @@ Edit
 
 - **Registrovani korisnik:**
   - Pristup svim funkcijama kao i gost
+  - Mogućnot ostavljanja recenzija
   - Mogućnost pregleda instrumenata
   - Pregled i upravljanje korpom
   - Započinjanje i finalizacija kupovine

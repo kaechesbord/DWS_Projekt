@@ -38,6 +38,14 @@
       "email": "Damir.Lihtner@gmail.com",
       "username": "Damir22",
       "password": "12345678"
+    },
+    {
+      "id": "6fca",
+      "firstName": "azam",
+      "lastName": "hasicic",
+      "email": "azam1@gmail.com",
+      "username": "haze",
+      "password": "12345678"
     }
   ],
   "messages": [
@@ -54,6 +62,13 @@
       "email": "Messi.Ronaldo@gmail.com",
       "subject": "Bubanj",
       "message": "Dobar Vam bubanj"
+    },
+    {
+      "id": "f0ab",
+      "name": "Damir LIhtner",
+      "email": "damir.lihtner.24@size.ba",
+      "subject": "123",
+      "message": "fdsgg"
     }
   ],
   "instruments": [
@@ -92,6 +107,15 @@
       "stock": "3",
       "code": "A22",
       "description": "Odlican"
+    },
+    {
+      "id": "bbdc",
+      "name": "gir",
+      "category": "gitare",
+      "price": "9",
+      "stock": "3",
+      "code": "MZK-12",
+      "description": "g"
     }
   ],
   "testimonials": [
@@ -136,6 +160,13 @@
       "text": "dasdsadas",
       "rating": 5,
       "date": "2025-06-09T16:54:47.717Z"
+    },
+    {
+      "id": "04d7",
+      "name": "Anonimni korisnik",
+      "text": "gdsgsgd",
+      "rating": 5,
+      "date": "2025-06-10T07:06:46.986Z"
     }
   ]
 }
